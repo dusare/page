@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Brain, Construction as Connection, Archive as Architecture, Users, Mail, Phone, Github, Linkedin, Workflow, Code2, Menu, X, BrainCircuit, Waypoints, DraftingCompass } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Brain, Construction as Connection, Archive as Architecture, Users, Mail, Phone, Github, Linkedin, Workflow, Code2, Menu, X, BrainCircuit, Waypoints, DraftingCompass, Calendar, MessageCircle, Rocket } from 'lucide-react';
 import ReactRotatingText from 'react-rotating-text';
 import LogoSlider from 'react-infinite-logo-slider';
 
@@ -8,9 +8,9 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
   const headerImages = [
-    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2000",
-    "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=2000",
-    "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=2000"
+    "https://dusare-338284363.imgix.net/ia.webp?auto=format&fit=crop&q=80&w=2000",
+    "https://dusare-338284363.imgix.net/api2.webp?auto=format&fit=crop&q=80&w=2000",
+    "https://dusare-338284363.imgix.net/architect.webp?auto=format&fit=crop&q=80&w=2000"
   ];
 
   useEffect(() => {
@@ -29,37 +29,27 @@ function App() {
 
   const rotatingWords = ['Consultora', 'Integraciones', 'Soluciones', 'Innovación', 'Tecnología', 'Agentes IA'];
 
-  const team = [
+  const ias = [
     {
-      name: "Juan Manuel Sirito",
-      role: "Arquitecto de sistemas | Experto en integraciones",
-      description: "Soy Ingeniero en Sistemas Informáticos (UAI) con Maestría en Dirección Estratégica Y Tecnología. Soy estratégico y poseo gran capacidad de análisis. Me considero una persona responsable, dinámica y creativa, con facilidad de adaptación, jugador de equipo, con iniciativa para resolutivos eficiente y orientada a objetivo. Deseo desarrollarme en una posición de liderazgo, en el área de sistemas o en la parte comercial de empresas de tecnología o consultoría. Poseo habilidades de dirección, estrategia, negociación, organización y gestión.",
-      image: "https://media.licdn.com/dms/image/v2/C4E03AQGqTrt0f4D_-Q/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1562197855848?e=1744243200&v=beta&t=lqzHfl-Jyk1NRqUDgf2mWEV1T6z4f4tpSCtCRv20C-E"
+      name: "OpenAI",
+      Image: "https://cdn.brandfetch.io/idR3duQxYl/theme/light/logo.svg?c=1bx1742504365898id64Mup7acJwp1kEwn&t=1718351879861"
     },
     {
-      name: "Ariel Sebastian Duarte",
-      role: "Fundador | Arquitecto de Software | Expert Agent AI",
-      description: "Arquitecto de Software, con más de 10 años de experiencia en multi plataformas. Desarrollando en diferentes tecnologías, brindando soporte en todas las etapas del desarrollo de las aplicaciones, tanto de ambientes, migración, integración continua. Teniendo sólidos conocimientos en múltiples plataformas.",
-      image: "https://media.licdn.com/dms/image/v2/C5603AQG3iO7Gg6IELw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1517450580592?e=1744243200&v=beta&t=CKfeK-65rTEFjBAQPZibacO6JVJCsfHm6i7DTM5kCsw"
+      name: "Claude",
+      Image: "https://cdn.brandfetch.io/idW5s392j1/theme/light/logo.svg?c=1bx1742506080449id64Mup7acberka77v&t=1738315809319"
     },
     {
-      name: "Martin Ariel Duran",
-      role: "Arquitecta de Software | Integraciones y Servicios",
-      description: "con experiencia en el sector público y privado, siempre priorizando el objetivo de mi trabajo colaborar en brindar servicio mejor, desde la parte técnica con mis conocimientos o brindando ideas y realizando las investigaciones necesarias, así como acompañando y mejorando las gestiones necesarias internas y a veces un poquito entrometido ;)",
-      image: "https://media.licdn.com/dms/image/v2/D4D03AQHP0ActbfJD4Q/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1672262170246?e=1744243200&v=beta&t=47GHwKQObm7mxO8_MuGMkx9rBfqz6iKpbS0N_iDHb7Y"
+      name: "Meta",
+      Image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Meta_Platforms_Inc._logo.svg/800px-Meta_Platforms_Inc._logo.svg.png"
     },
     {
-      name: "Heydelberth Rodriguez",
-      role: "Mulesoft Senior Developer | Senior Developer | Integrador | Developer | Mule",
-      description: "Ingeniero de software con 8+ años de experiencia en desarrollo y despliegue de soluciones tecnológicas. Especialista en aplicaciones web, móviles y soluciones empresariales. Liderazgo en equipos multidisciplinarios y colaboración con stakeholders. Manejo de Java, PHP, .NET, JavaScript, Python, entre otros. Enfoque en excelencia técnica, innovación y entrega puntual. 🎓 Formación en desarrollo y diseño de aplicaciones, con compromiso continuo de aprendizaje.",
-      image: "https://w1.pngwing.com/pngs/743/500/png-transparent-circle-silhouette-logo-user-user-profile-green-facial-expression-nose-cartoon-thumbnail.png"
+      name: "Gemini",
+      Image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Google_Gemini_logo.svg/344px-Google_Gemini_logo.svg.png"
+    },
+    {
+      name: "DeepSeek",
+      Image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/DeepSeek_logo.svg/512px-DeepSeek_logo.svg.png"
     }
-  ];
-
-  const clients = [
-    "https://static-00.iconduck.com/assets.00/amazon-icon-2048x1722-myhuicq8.png",
-    "https://cdn.iconscout.com/icon/free/png-256/free-nvidia-282591.png?f=webp",
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Netflix_icon.svg/1200px-Netflix_icon.svg.png"
   ];
 
   const tools = [
@@ -94,6 +84,84 @@ function App() {
     {
       name: "CloudFlare",
       image: "https://cdn.brandfetch.io/idJ3Cg8ymG/idASSo3XVu.svg?c=1bx1741530166352id64Mup7acR4KNtmq-&t=1646237667530"
+    }
+  ];
+
+  const team = [
+    {
+      name: "Juan Manuel Sirito",
+      role: "Arquitecto de sistemas | Experto en integraciones",
+      description: "Soy Ingeniero en Sistemas Informáticos (UAI) con Maestría en Dirección Estratégica Y Tecnología. Soy estratégico y poseo gran capacidad de análisis. Me considero una persona responsable, dinámica y creativa, con facilidad de adaptación, jugador de equipo, con iniciativa para resolutivos eficiente y orientada a objetivo. Deseo desarrollarme en una posición de liderazgo, en el área de sistemas o en la parte comercial de empresas de tecnología o consultoría. Poseo habilidades de dirección, estrategia, negociación, organización y gestión.",
+      image: "https://media.licdn.com/dms/image/v2/C4E03AQGqTrt0f4D_-Q/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1562197855848?e=1744243200&v=beta&t=lqzHfl-Jyk1NRqUDgf2mWEV1T6z4f4tpSCtCRv20C-E"
+    },
+    {
+      name: "Ariel Sebastian Duarte",
+      role: "Fundador | Arquitecto de Software | Expert Agent AI",
+      description: "Arquitecto de Software, con más de 10 años de experiencia en multi plataformas. Desarrollando en diferentes tecnologías, brindando soporte en todas las etapas del desarrollo de las aplicaciones, tanto de ambientes, migración, integración continua. Teniendo sólidos conocimientos en múltiples plataformas.",
+      image: "https://media.licdn.com/dms/image/v2/C5603AQG3iO7Gg6IELw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1517450580592?e=1744243200&v=beta&t=CKfeK-65rTEFjBAQPZibacO6JVJCsfHm6i7DTM5kCsw"
+    },
+    {
+      name: "Martin Ariel Duran",
+      role: "Arquitecta de Software | Integraciones y Servicios",
+      description: "con experiencia en el sector público y privado, siempre priorizando el objetivo de mi trabajo colaborar en brindar servicio mejor, desde la parte técnica con mis conocimientos o brindando ideas y realizando las investigaciones necesarias, así como acompañando y mejorando las gestiones necesarias internas y a veces un poquito entrometido ;)",
+      image: "https://media.licdn.com/dms/image/v2/D4D03AQHP0ActbfJD4Q/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1672262170246?e=1744243200&v=beta&t=47GHwKQObm7mxO8_MuGMkx9rBfqz6iKpbS0N_iDHb7Y"
+    },
+    {
+      name: "Heydelberth Rodriguez",
+      role: "Mulesoft Senior Developer | Senior Developer | Integrador | Developer | Mule",
+      description: "Ingeniero de software con 8+ años de experiencia en desarrollo y despliegue de soluciones tecnológicas. Especialista en aplicaciones web, móviles y soluciones empresariales. Liderazgo en equipos multidisciplinarios y colaboración con stakeholders. Manejo de Java, PHP, .NET, JavaScript, Python, entre otros. Enfoque en excelencia técnica, innovación y entrega puntual. 🎓 Formación en desarrollo y diseño de aplicaciones, con compromiso continuo de aprendizaje.",
+      image: "https://w1.pngwing.com/pngs/743/500/png-transparent-circle-silhouette-logo-user-user-profile-green-facial-expression-nose-cartoon-thumbnail.png"
+    }
+  ];
+
+  const clients = [
+    "https://static-00.iconduck.com/assets.00/amazon-icon-2048x1722-myhuicq8.png",
+    "https://cdn.iconscout.com/icon/free/png-256/free-nvidia-282591.png?f=webp",
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Netflix_icon.svg/1200px-Netflix_icon.svg.png"
+  ];
+
+  const services = [
+    {
+      icon: BrainCircuit,
+      title: "Agentes IA",
+      shortDesc: "Desarrollo de agentes inteligentes y soluciones de IA personalizadas",
+      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=400",
+      detailedDesc: [
+        "Desarrollo de Agentes IA y asistentes virtuales personalizados",
+        "Implementación de sistemas de procesamiento de lenguaje natural",
+        "Automatización de procesos con IA",
+        "Análisis predictivo y machine learning",
+        "Sistemas de recomendación inteligentes",
+        "Integración de modelos de IA con aplicaciones existentes"
+      ]
+    },
+    {
+      icon: Waypoints,
+      title: "Integraciones",
+      shortDesc: "Soluciones de integración empresarial y APIs",
+      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=400",
+      detailedDesc: [
+        "Desarrollo de APIs RESTful, GraphQL, AsyncAPI, etc.",
+        "Integración de sistemas legacy con tecnologías modernas",
+        "Implementación de middleware y ESB",
+        "Automatización de flujos de trabajo empresariales",
+        "Integración con servicios en la nube AWS, Azure, Google Cloud, etc",
+        "Desarrollo de microservicios"
+      ]
+    },
+    {
+      icon: DraftingCompass,
+      title: "Arquitectura de Software",
+      shortDesc: "Diseño y consultoría en arquitecturas modernas",
+      image: "https://images.unsplash.com/photo-1561736778-92e52a7769ef?auto=format&fit=crop&q=80&w=400",
+      detailedDesc: [
+        "Diseño de arquitecturas escalables y resilientes",
+        "Modernización de aplicaciones legacy",
+        "Implementación de patrones de diseño",
+        "Optimización de rendimiento y seguridad",
+        "Arquitecturas cloud-native y serverless",
+        "Consultoría en mejores prácticas de desarrollo"
+      ]
     }
   ];
 
@@ -133,36 +201,45 @@ function App() {
                 md:hidden flex items-center justify-center
               `}>
                 <div className="flex flex-col items-center space-y-8">
+                  <a href="#quienes-somos" 
+                     onClick={handleNavClick}
+                     className="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors">
+                    Quienes Somos
+                  </a>
                   <a href="#servicios" 
                      onClick={handleNavClick}
                      className="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors">
                     Servicios
+                  </a>
+                  <a href="#como-empezar" 
+                     onClick={handleNavClick}
+                     className="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors">
+                    Cómo Empezar
                   </a>
                   <a href="#equipo" 
                      onClick={handleNavClick}
                      className="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors">
                     Equipo
                   </a>
-                  <a href="#contacto" 
-                     onClick={handleNavClick}
-                     className="text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
-                    Contacto
-                  </a>
                 </div>
               </div>
 
               <div className="hidden md:flex space-x-4">
+                <a href="#quienes-somos" 
+                   className="px-4 py-2 rounded-full bg-gradient-to-r from-cyan-400/10 to-purple-500/10 text-white border border-transparent hover:border-cyan-400/30 transition-all duration-300 hover:from-cyan-400/20 hover:to-purple-500/20">
+                  Quienes Somos
+                </a>
                 <a href="#servicios" 
                    className="px-4 py-2 rounded-full bg-gradient-to-r from-cyan-400/10 to-purple-500/10 text-white border border-transparent hover:border-cyan-400/30 transition-all duration-300 hover:from-cyan-400/20 hover:to-purple-500/20">
                   Servicios
                 </a>
-                <a href="#equipo" 
+                <a href="#como-empezar" 
                    className="px-4 py-2 rounded-full bg-gradient-to-r from-cyan-400/10 to-purple-500/10 text-white border border-transparent hover:border-cyan-400/30 transition-all duration-300 hover:from-cyan-400/20 hover:to-purple-500/20">
-                  Equipo
+                  Cómo Empezar
                 </a>
-                <a href="#contacto" 
+                <a href="#equipo" 
                    className="px-4 py-2 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 text-white hover:opacity-90 transition-opacity">
-                  Contacto
+                  Equipo
                 </a>
               </div>
             </div>
@@ -176,8 +253,12 @@ function App() {
               <p className="text-lg sm:text-xl md:text-2xl mb-6 md:mb-8 text-white/90 px-4">
                 Expertos en IA, Integraciones y Arquitectura de Software
               </p>
-              <a href="#contacto" className="bg-gradient-to-r from-cyan-400 to-purple-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:opacity-90 transition-opacity text-base sm:text-lg inline-block">
-                Contáctanos
+              
+              <a 
+                href="#como-empezar"
+                className="inline-block bg-gradient-to-r from-cyan-400 to-purple-500 text-white px-8 py-4 rounded-full font-semibold hover:opacity-90 transition-all duration-300"
+              >
+                Comenzar Ahora
               </a>
             </div>
           </div>
@@ -189,50 +270,169 @@ function App() {
           <h2 className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
             Nuestros Servicios
           </h2>
-          <div className="grid md:grid-cols-3 gap-12">
-            <div className="text-center p-6 rounded-lg bg-gray-800 hover:bg-gray-800/80 transition-colors">
-              <BrainCircuit className="w-16 h-16 mx-auto mb-4 text-cyan-400" />
-              <h3 className="text-2xl font-semibold mb-4 text-white">Agentes AI</h3>
-              <p className="text-gray-300 mb-4">Desarrollo de agentes inteligentes y soluciones de IA personalizadas</p>
-              <img 
-                src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=400"
-                alt="AI"
-                className="rounded-lg mb-4"
-              />
-              <a href="#contacto" className="text-cyan-400 hover:text-purple-500 transition-colors">Saber más →</a>
-            </div>
-            
-            <div className="text-center p-6 rounded-lg bg-gray-800 hover:bg-gray-800/80 transition-colors">
-              <Waypoints className="w-16 h-16 mx-auto mb-4 text-cyan-400" />
-              <h3 className="text-2xl font-semibold mb-4 text-white">Integraciones MuleSoft</h3>
-              <p className="text-gray-300 mb-4">Soluciones de integración empresarial y APIs</p>
-              <img 
-                src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=400"
-                alt="Integration"
-                className="rounded-lg mb-4"
-              />
-              <a href="#contacto" className="text-cyan-400 hover:text-purple-500 transition-colors">Saber más →</a>
-            </div>
-            
-            <div className="text-center p-6 rounded-lg bg-gray-800 hover:bg-gray-800/80 transition-colors">
-              <DraftingCompass className="w-16 h-16 mx-auto mb-4 text-cyan-400" />
-              <h3 className="text-2xl font-semibold mb-4 text-white">Arquitectura de Software</h3>
-              <p className="text-gray-300 mb-4">Diseño y consultoría en arquitecturas modernas</p>
-              <img 
-                src="https://images.unsplash.com/photo-1561736778-92e52a7769ef?auto=format&fit=crop&q=80&w=400"
-                alt="Architecture"
-                className="rounded-lg mb-4"
-              />
-              <a href="#contacto" className="text-cyan-400 hover:text-purple-500 transition-colors">Saber más →</a>
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
+            {services.map((service, index) => {
+              const Icon = service.icon;
+              return (
+                <div key={index} className="group min-h-[500px] h-full [perspective:1000px]">
+                  <div className="relative h-full w-full rounded-xl transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                    {/* Front of the card */}
+                    <div className="absolute inset-0">
+                      <div className="h-full w-full rounded-xl bg-gray-800 p-6 sm:p-8 shadow-xl shadow-cyan-400/10 flex flex-col items-center">
+                        <Icon className="w-12 sm:w-16 h-12 sm:h-16 text-cyan-400 mb-4" />
+                        <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-white text-center">{service.title}</h3>
+                        <p className="text-gray-300 mb-4 text-center text-sm sm:text-base">{service.shortDesc}</p>
+                        <img 
+                          src={service.image}
+                          alt={service.title}
+                          className="rounded-lg mt-auto w-full h-36 sm:h-48 object-cover"
+                        />
+                      </div>
+                    </div>
+                    
+                    {/* Back of the card */}
+                    <div className="absolute inset-0 h-full w-full rounded-xl bg-gray-800 px-4 sm:px-8 py-4 sm:py-6 [transform:rotateY(180deg)] [backface-visibility:hidden] overflow-y-auto">
+                      <div className="flex flex-col h-full">
+                        <div className="flex-grow">
+                          <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-center text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+                            {service.title}
+                          </h3>
+                          <ul className="space-y-2 sm:space-y-3 text-gray-300 text-xs sm:text-sm">
+                            {service.detailedDesc.map((desc, i) => (
+                              <li key={i} className="flex items-start">
+                                <span className="inline-block w-1.5 h-1.5 rounded-full bg-cyan-400 mt-1.5 mr-2 flex-shrink-0"></span>
+                                <span className="leading-relaxed">{desc}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div className="pt-4 sm:pt-6 mt-auto">
+                          <a 
+                            href="https://wa.me/541170601388?text=Te+damos+la+bienvenida+a+Dusare." 
+                            className="block text-center w-full px-4 sm:px-6 py-2.5 sm:py-3 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 text-white text-sm sm:text-base font-semibold hover:opacity-90 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-cyan-400/20"
+                          >
+                            Consultar Ahora
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section id="como-empezar" className="py-20 bg-gray-800">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+            Cómo Empezar
+          </h2>
+          <div className="max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="bg-gray-900 rounded-xl p-8 relative">
+                <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full flex items-center justify-center text-2xl font-bold text-white">
+                  1
+                </div>
+                <h3 className="text-xl font-semibold mb-4 text-white pl-6">Hablanos por privado</h3>
+                <p className="text-gray-300 mb-6">
+                  Cuéntanos sobre tu proyecto o necesidad. Analizaremos si podemos ayudarte y cómo podemos agregar valor a tu negocio.
+                </p>
+                <a 
+                  href="https://wa.me/541170601388?text=Realiza+tu+consulta."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-2 text-cyan-400 hover:text-purple-500 transition-colors"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  <span>Iniciar conversación</span>
+                </a>
+              </div>
+
+              <div className="bg-gray-900 rounded-xl p-8 relative">
+                <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full flex items-center justify-center text-2xl font-bold text-white">
+                  2
+                </div>
+                <h3 className="text-xl font-semibold mb-4 text-white pl-6">Empecemos la Consultoría</h3>
+                <p className="text-gray-300 mb-6">
+                  Agendamos una llamada estratégica para analizar en profundidad los procesos de tu negocio y diseñar la mejor solución.
+                </p>
+                <a 
+                  href="https://calendar.app.google/bVmyN42sdsdEqcTr8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-2 text-cyan-400 hover:text-purple-500 transition-colors"
+                >
+                  <Calendar className="w-5 h-5" />
+                  <span>Agendar llamada</span>
+                </a>
+              </div>
+          
+              <div className="bg-gray-900 rounded-xl p-8 relative">
+                <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full flex items-center justify-center text-2xl font-bold text-white">
+                  3
+                </div>
+                <h3 className="text-xl font-semibold mb-4 text-white pl-6">Back Office Inteligente</h3>
+                <p className="text-gray-300 mb-6">
+                Te prepararemos un entregable con todas las soluciones de IA aplicables a tu negocio y los beneficios que obtendrás.
+                </p>
+                <a 
+                  href="https://calendar.app.google/bVmyN42sdsdEqcTr8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-2 text-cyan-400 hover:text-purple-500 transition-colors"
+                >
+                  <Calendar className="w-5 h-5" />
+                  <span>Agendar reunion</span>
+                </a>
+              </div>
+
+              <div className="bg-gray-900 rounded-xl p-8 relative">
+                <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full flex items-center justify-center text-2xl font-bold text-white">
+                  4
+                </div>
+                <h3 className="text-xl font-semibold mb-4 text-white pl-6">IA a Medida</h3>
+                <p className="text-gray-300 mb-6">
+                Finalmente, acordaremos iniciar el desarrollo de soluciones de IA a medida y te brindaremos acceso a recursos exclusivos de software ya disponibles, garantizando que el entregable cumple plenamente con todos los requerimientos establecidos.
+                </p>
+                <a 
+                  href="https://calendar.app.google/bVmyN42sdsdEqcTr8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-2 text-cyan-400 hover:text-purple-500 transition-colors"
+                >
+                  <Rocket className="w-5 h-5" />
+                  <span>Solicita tu proyecto</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-gray-800">
+      <section className="py-20 bg-gray-900">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+            Intelegencias Artificial utilizadas
+          </h2>
+          <div className="flex justify-center items-center space-x-12 flex-wrap">
+            {ias.map((ia, index) => (
+              <img 
+                key={index}
+                src={ia.Image}
+                alt={`Cliente ${index + 1}`}
+                className="w-40 h-40 h-16 object-contain grayscale hover:grayscale-0 transition-all"
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="quienes-somos" className="py-20 bg-gray-800">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
-            Quiénes Somos
+            Sobre Nosotros
           </h2>
           <div className="max-w-3xl mx-auto text-center">
             <p className="text-lg text-gray-300 mb-8">
@@ -274,7 +474,7 @@ function App() {
           </div>
         </div>
       </section>
-
+{/*
       <section className="py-20 bg-gray-800">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
@@ -292,11 +492,11 @@ function App() {
           </div>
         </div>
       </section>
-
+*/}
       <section className="py-20 bg-gray-900">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
-            Herramientas y Tecnologías
+            Herramientas y Tecnologías Usadas
           </h2>
           <div className="w-full max-w-4xl mx-auto">
             <LogoSlider
@@ -309,7 +509,6 @@ function App() {
               {tools.map((tool, index) => (
                 <LogoSlider.Slide
                   key={index}
-                  className="flex items-center justify-center"
                 >
                     <img
                       src={tool.image}
@@ -322,60 +521,10 @@ function App() {
           </div>
         </div>
       </section>
-
-      <section id="contacto" className="py-20 bg-gradient-to-r from-cyan-400 to-purple-500">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 text-white">Contacto</h2>
-          <div className="max-w-3xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
-              <div className="flex items-center space-x-4">
-                <Mail className="w-8 h-8 text-white" />
-                <div>
-                  <h3 className="font-semibold text-white">Email</h3>
-                  <p className="text-white/90">contacto@dusareconsult.com</p>
-                </div>
-              </div>
-              <div className="flex items-center space-x-4">
-                <Phone className="w-8 h-8 text-white" />
-                <div>
-                  <h3 className="font-semibold text-white">Teléfono</h3>
-                  <p className="text-white/90">+34 900 123 456</p>
-                </div>
-              </div>
-            </div>
-            
-            <form className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <input 
-                  type="text" 
-                  placeholder="Nombre"
-                  className="w-full px-4 py-2 rounded-lg bg-white/10 text-white placeholder-white/70 border border-white/20 focus:border-white focus:outline-none"
-                />
-                <input 
-                  type="email" 
-                  placeholder="Email"
-                  className="w-full px-4 py-2 rounded-lg bg-white/10 text-white placeholder-white/70 border border-white/20 focus:border-white focus:outline-none"
-                />
-              </div>
-              <textarea 
-                placeholder="Mensaje"
-                rows={4}
-                className="w-full px-4 py-2 rounded-lg bg-white/10 text-white placeholder-white/70 border border-white/20 focus:border-white focus:outline-none"
-              ></textarea>
-              <button 
-                type="submit"
-                className="px-6 py-2 rounded-full bg-gradient-to-r from-cyan-400/10 to-purple-500/10 text-white border  hover:border-cyan-400/30 transition-all duration-300 hover:from-cyan-400/20 hover:to-purple-500/20"
-              >
-                Enviar Mensaje
-              </button>
-            </form>
-          </div>
-        </div>
-      </section>
-
+      
       <footer className="bg-gray-900 text-white py-8">
         <div className="container mx-auto px-6 text-center">
-          <p className="text-gray-400">&copy; 2024 Dusare Consult. Todos los derechos reservados.</p>
+          <p className="text-gray-400">&copy; 2025 Dusare Consult. Todos los derechos reservados.</p>
         </div>
       </footer>
     </div>
