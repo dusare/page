@@ -92,19 +92,19 @@ function App() {
       name: "Juan Manuel Sirito",
       role: "Arquitecto de sistemas | Experto en integraciones",
       description: "Soy Ingeniero en Sistemas Informáticos (UAI) con Maestría en Dirección Estratégica Y Tecnología. Soy estratégico y poseo gran capacidad de análisis. Me considero una persona responsable, dinámica y creativa, con facilidad de adaptación, jugador de equipo, con iniciativa para resolutivos eficiente y orientada a objetivo. Deseo desarrollarme en una posición de liderazgo, en el área de sistemas o en la parte comercial de empresas de tecnología o consultoría. Poseo habilidades de dirección, estrategia, negociación, organización y gestión.",
-      image: "https://media.licdn.com/dms/image/v2/C4E03AQGqTrt0f4D_-Q/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1562197855848?e=1744243200&v=beta&t=lqzHfl-Jyk1NRqUDgf2mWEV1T6z4f4tpSCtCRv20C-E"
+      image: "https://w1.pngwing.com/pngs/743/500/png-transparent-circle-silhouette-logo-user-user-profile-green-facial-expression-nose-cartoon-thumbnail.png"
     },
     {
       name: "Ariel Sebastian Duarte",
       role: "Fundador | Arquitecto de Software | Expert Agent AI",
       description: "Arquitecto de Software, con más de 10 años de experiencia en multi plataformas. Desarrollando en diferentes tecnologías, brindando soporte en todas las etapas del desarrollo de las aplicaciones, tanto de ambientes, migración, integración continua. Teniendo sólidos conocimientos en múltiples plataformas.",
-      image: "https://media.licdn.com/dms/image/v2/C5603AQG3iO7Gg6IELw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1517450580592?e=1744243200&v=beta&t=CKfeK-65rTEFjBAQPZibacO6JVJCsfHm6i7DTM5kCsw"
+      image: "https://w1.pngwing.com/pngs/743/500/png-transparent-circle-silhouette-logo-user-user-profile-green-facial-expression-nose-cartoon-thumbnail.png"
     },
     {
       name: "Martin Ariel Duran",
       role: "Arquitecta de Software | Integraciones y Servicios",
       description: "con experiencia en el sector público y privado, siempre priorizando el objetivo de mi trabajo colaborar en brindar servicio mejor, desde la parte técnica con mis conocimientos o brindando ideas y realizando las investigaciones necesarias, así como acompañando y mejorando las gestiones necesarias internas y a veces un poquito entrometido ;)",
-      image: "https://media.licdn.com/dms/image/v2/D4D03AQHP0ActbfJD4Q/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1672262170246?e=1744243200&v=beta&t=47GHwKQObm7mxO8_MuGMkx9rBfqz6iKpbS0N_iDHb7Y"
+      image: "https://w1.pngwing.com/pngs/743/500/png-transparent-circle-silhouette-logo-user-user-profile-green-facial-expression-nose-cartoon-thumbnail.png"
     },
     {
       name: "Heydelberth Rodriguez",
