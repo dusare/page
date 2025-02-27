@@ -359,7 +359,7 @@ function App() {
                   Agendamos una llamada estratégica para analizar en profundidad los procesos de tu negocio y diseñar la mejor solución.
                 </p>
                 <a 
-                  href="https://calendar.app.google/bVmyN42sdsdEqcTr8"
+                  href="https://cal.com/dusare/calendar"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center space-x-2 text-cyan-400 hover:text-purple-500 transition-colors"
@@ -378,7 +378,7 @@ function App() {
                 Te prepararemos un entregable con todas las soluciones de IA aplicables a tu negocio y los beneficios que obtendrás.
                 </p>
                 <a 
-                  href="https://calendar.app.google/bVmyN42sdsdEqcTr8"
+                  href="https://cal.com/dusare/calendar"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center space-x-2 text-cyan-400 hover:text-purple-500 transition-colors"
@@ -397,7 +397,7 @@ function App() {
                 Finalmente, acordaremos iniciar el desarrollo de soluciones de IA a medida y te brindaremos acceso a recursos exclusivos de software ya disponibles, garantizando que el entregable cumple plenamente con todos los requerimientos establecidos.
                 </p>
                 <a 
-                  href="https://calendar.app.google/bVmyN42sdsdEqcTr8"
+                  href="https://cal.com/dusare/calendar"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center space-x-2 text-cyan-400 hover:text-purple-500 transition-colors"
