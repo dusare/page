@@ -216,11 +216,13 @@ function App() {
                      className="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors">
                     Cómo Empezar
                   </a>
+{/*
                   <a href="#equipo" 
                      onClick={handleNavClick}
                      className="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors">
                     Equipo
                   </a>
+*/}
                 </div>
               </div>
 
@@ -234,13 +236,15 @@ function App() {
                   Servicios
                 </a>
                 <a href="#como-empezar" 
-                   className="px-4 py-2 rounded-full bg-gradient-to-r from-cyan-400/10 to-purple-500/10 text-white border border-transparent hover:border-cyan-400/30 transition-all duration-300 hover:from-cyan-400/20 hover:to-purple-500/20">
+                   className="px-4 py-2 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 text-white hover:opacity-90 transition-opacity">
                   Cómo Empezar
                 </a>
+{/*
                 <a href="#equipo" 
                    className="px-4 py-2 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 text-white hover:opacity-90 transition-opacity">
                   Equipo
                 </a>
+*/}
               </div>
             </div>
           </nav>
@@ -452,7 +456,7 @@ function App() {
           </div>
         </div>
       </section>
-
+{/*
       <section id="equipo" className="py-20 bg-gray-900">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
@@ -474,6 +478,7 @@ function App() {
           </div>
         </div>
       </section>
+*/}
 {/*
       <section className="py-20 bg-gray-800">
         <div className="container mx-auto px-6">
