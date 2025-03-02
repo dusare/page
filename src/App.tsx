@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Brain, Construction as Connection, Archive as Architecture, Users, Mail, Phone, Github, Linkedin, Workflow, Code2, Menu, X, BrainCircuit, Waypoints, DraftingCompass, Calendar, MessageCircle, Rocket } from 'lucide-react';
+import { Brain, Construction as Connection, Archive as Architecture, Users, Mail, Phone, Github, Linkedin, Workflow, Code2, Menu, X, BrainCircuit, Waypoints, DraftingCompass, Calendar, MessageCircle, Rocket, Instagram, Facebook, Twitter, Send } from 'lucide-react';
 import ReactRotatingText from 'react-rotating-text';
 import LogoSlider from 'react-infinite-logo-slider';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 function App() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -14,13 +16,32 @@ function App() {
   ];
 
   useEffect(() => {
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      once: false,
+      mirror: true,
+      offset: 100,
+      easing: 'ease-in-out'
+    });
+
+    // Refresh AOS on window resize
+    window.addEventListener('resize', () => {
+      AOS.refresh();
+    });
+
     const timer = setInterval(() => {
       setCurrentImageIndex((prevIndex) => 
         prevIndex === headerImages.length - 1 ? 0 : prevIndex + 1
       );
     }, 5000);
 
-    return () => clearInterval(timer);
+    return () => {
+      clearInterval(timer);
+      window.removeEventListener('resize', () => {
+        AOS.refresh();
+      });
+    };
   }, []);
 
   const handleNavClick = () => {
@@ -165,6 +186,17 @@ function App() {
     }
   ];
 
+  // Social media links
+  const socialLinks = [
+    { name: "GitHub", icon: Github, url: "https://github.com/dusare", color: "hover:text-gray-300" },
+    { name: "LinkedIn", icon: Linkedin, url: "https://linkedin.com", color: "hover:text-blue-500" },
+    { name: "Instagram", icon: Instagram, url: "https://instagram.com", color: "hover:text-pink-500" },
+    { name: "Facebook", icon: Facebook, url: "https://facebook.com", color: "hover:text-blue-600" },
+    { name: "Twitter", icon: Twitter, url: "https://twitter.com", color: "hover:text-blue-400" },
+    { name: "WhatsApp", icon: MessageCircle, url: "https://wa.me/541170601388?text=Hola+Dusare", color: "hover:text-green-500" },
+    { name: "Telegram", icon: Send, url: "https://t.me/dusare", color: "hover:text-blue-300" }
+  ];
+
   return (
     <div className="min-h-screen bg-gray-900">
       <header className="relative bg-cover bg-center h-screen transition-all duration-1000 ease-in-out"
@@ -250,7 +282,7 @@ function App() {
           </nav>
           
           <div className="container mx-auto px-6 flex items-center justify-center h-[calc(100vh-5rem)]">
-            <div className="text-center max-w-4xl mx-auto">
+            <div className="text-center max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="200">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 px-4">
                 Soluciones Tecnológicas Innovadoras
               </h1>
@@ -271,14 +303,14 @@ function App() {
 
       <section id="servicios" className="py-20 bg-gray-900">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+          <h2 className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500" data-aos="fade-up">
             Nuestros Servicios
           </h2>
           <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
             {services.map((service, index) => {
               const Icon = service.icon;
               return (
-                <div key={index} className="group min-h-[500px] h-full [perspective:1000px]">
+                <div key={index} className="group min-h-[500px] h-full [perspective:1000px]" data-aos="fade-up" data-aos-delay={index * 100}>
                   <div className="relative h-full w-full rounded-xl transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
                     {/* Front of the card */}
                     <div className="absolute inset-0">
@@ -330,12 +362,12 @@ function App() {
 
       <section id="como-empezar" className="py-20 bg-gray-800">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+          <h2 className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500" data-aos="fade-up">
             Cómo Empezar
           </h2>
           <div className="max-w-4xl mx-auto">
             <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-gray-900 rounded-xl p-8 relative">
+              <div className="bg-gray-900 rounded-xl p-8 relative" data-aos="fade-right" data-aos-delay="100">
                 <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full flex items-center justify-center text-2xl font-bold text-white">
                   1
                 </div>
@@ -354,7 +386,7 @@ function App() {
                 </a>
               </div>
 
-              <div className="bg-gray-900 rounded-xl p-8 relative">
+              <div className="bg-gray-900 rounded-xl p-8 relative" data-aos="fade-left" data-aos-delay="200">
                 <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full flex items-center justify-center text-2xl font-bold text-white">
                   2
                 </div>
@@ -373,7 +405,7 @@ function App() {
                 </a>
               </div>
           
-              <div className="bg-gray-900 rounded-xl p-8 relative">
+              <div className="bg-gray-900 rounded-xl p-8 relative" data-aos="fade-right" data-aos-delay="300">
                 <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full flex items-center justify-center text-2xl font-bold text-white">
                   3
                 </div>
@@ -392,7 +424,7 @@ function App() {
                 </a>
               </div>
 
-              <div className="bg-gray-900 rounded-xl p-8 relative">
+              <div className="bg-gray-900 rounded-xl p-8 relative" data-aos="fade-left" data-aos-delay="400">
                 <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full flex items-center justify-center text-2xl font-bold text-white">
                   4
                 </div>
@@ -417,16 +449,18 @@ function App() {
 
       <section className="py-20 bg-gray-900">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
-            Intelegencias Artificial utilizadas
+          <h2 className="text-3xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500" data-aos="fade-up">
+            Inteligencia Artificial utilizadas
           </h2>
-          <div className="flex justify-center items-center space-x-12 flex-wrap">
+          <div className="flex justify-center items-center space-x-12 flex-wrap" data-aos="fade-up" data-aos-delay="200">
             {ias.map((ia, index) => (
               <img 
                 key={index}
                 src={ia.Image}
                 alt={`Cliente ${index + 1}`}
                 className="w-40 h-40 h-16 object-contain grayscale hover:grayscale-0 transition-all"
+                data-aos="zoom-in"
+                data-aos-delay={100 * (index + 1)}
               />
             ))}
           </div>
@@ -435,23 +469,35 @@ function App() {
 
       <section id="quienes-somos" className="py-20 bg-gray-800">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+          <h2 className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500" data-aos="fade-up">
             Sobre Nosotros
           </h2>
-          <div className="max-w-3xl mx-auto text-center">
+          <div className="max-w-3xl mx-auto text-center" data-aos="fade-up" data-aos-delay="200">
             <p className="text-lg text-gray-300 mb-8">
               Somos un equipo de expertos apasionados por la tecnología y la innovación. 
               Nos especializamos en crear soluciones tecnológicas que impulsan la transformación 
               digital de nuestros clientes mediante la implementación de IA avanzada, 
               integraciones empresariales robustas y arquitecturas de software escalables.
             </p>
-            <div className="flex justify-center space-x-6">
-              <a href="https://github.com/dusare" className="text-gray-400 hover:text-cyan-400 transition-colors">
-                <Github className="w-8 h-8" />
-              </a>
-              <a href="https://linkedin.com" className="text-gray-400 hover:text-cyan-400 transition-colors">
-                <Linkedin className="w-8 h-8" />
-              </a>
+            
+            <div className="flex flex-wrap justify-center gap-4 mb-8" data-aos="fade-up" data-aos-delay="300">
+              {socialLinks.map((social, index) => {
+                const Icon = social.icon;
+                return (
+                  <a 
+                    key={index}
+                    href={social.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={`text-gray-400 ${social.color} transition-colors duration-300 transform hover:scale-110 flex flex-col items-center`}
+                    data-aos="zoom-in"
+                    data-aos-delay={50 * (index + 1)}
+                  >
+                    <Icon className="w-8 h-8 mb-1" />
+                    <span className="text-xs">{social.name}</span>
+                  </a>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -500,10 +546,10 @@ function App() {
 */}
       <section className="py-20 bg-gray-900">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+          <h2 className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500" data-aos="fade-up">
             Herramientas y Tecnologías Usadas
           </h2>
-          <div className="w-full max-w-4xl mx-auto">
+          <div className="w-full max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="200">
             <LogoSlider
               width="200px"
               duration={40}
