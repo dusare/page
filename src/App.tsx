@@ -189,12 +189,12 @@ function App() {
   // Social media links
   const socialLinks = [
     { name: "GitHub", icon: Github, url: "https://github.com/dusare", color: "hover:text-gray-300" },
-    { name: "LinkedIn", icon: Linkedin, url: "https://linkedin.com", color: "hover:text-blue-500" },
-    { name: "Instagram", icon: Instagram, url: "https://instagram.com", color: "hover:text-pink-500" },
-    { name: "Facebook", icon: Facebook, url: "https://facebook.com", color: "hover:text-blue-600" },
-    { name: "Twitter", icon: Twitter, url: "https://twitter.com", color: "hover:text-blue-400" },
+  //  { name: "LinkedIn", icon: Linkedin, url: "https://linkedin.com", color: "hover:text-blue-500" },
+    { name: "Instagram", icon: Instagram, url: "https://www.instagram.com/dusare_ia/", color: "hover:text-pink-500" },
+    { name: "Facebook", icon: Facebook, url: "https://www.facebook.com/share/17vjMMv57u/", color: "hover:text-blue-600" },
+    { name: "x.com", icon: X, url: "https://x.com/Dusare_ia", color: "hover:text-blue-400" },
     { name: "WhatsApp", icon: MessageCircle, url: "https://wa.me/541170601388?text=Hola+Dusare", color: "hover:text-green-500" },
-    { name: "Telegram", icon: Send, url: "https://t.me/dusare", color: "hover:text-blue-300" }
+    { name: "Telegram", icon: Send, url: "https://t.me/dusare_ia", color: "hover:text-blue-300" }
   ];
 
   return (
