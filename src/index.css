@@ -1,3 +1,326 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .bg-grid-pattern {
+    background-image: 
+      linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-float-delayed {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: 2s;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  
+  .backdrop-blur-xs {
+    backdrop-filter: blur(2px);
+  }
+  
+  .glass-effect {
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+  }
+  
+  .gradient-border {
+    position: relative;
+  }
+  
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+  }
+
+  /* Custom fade-in-up animation for rotating text */
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(10px) scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  /* Enhanced rotating text styles */
+  .rotating-text-word {
+    display: inline-block;
+    background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.3));
+    animation: textGlow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes textGlow {
+    0% {
+      filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.3));
+    }
+    100% {
+      filter: drop-shadow(0 0 12px rgba(96, 165, 250, 0.5)) drop-shadow(0 0 20px rgba(167, 139, 250, 0.3));
+    }
+  }
+
+  /* Glitch Text Effect */
+  .glitch-text {
+    position: relative;
+    color: #ffffff;
+    font-weight: bold;
+    background: linear-gradient(135deg, #ffffff, #e2e8f0, #cbd5e1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: glitch-text-glow 3s ease-in-out infinite alternate;
+  }
+
+  .glitch-text::before,
+  .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .glitch-text::before {
+    color: #ff0080;
+    z-index: -1;
+    animation: glitch-before 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+
+  .glitch-text::after {
+    color: #00ffff;
+    z-index: -2;
+    animation: glitch-after 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+
+  .glitch-text.glitch-active::before {
+    opacity: 0.8;
+    animation: glitch-before 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+
+  .glitch-text.glitch-active::after {
+    opacity: 0.8;
+    animation: glitch-after 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+
+  @keyframes glitch-text-glow {
+    0% {
+      text-shadow: 
+        0 0 5px rgba(255, 255, 255, 0.3),
+        0 0 10px rgba(96, 165, 250, 0.2),
+        0 0 15px rgba(167, 139, 250, 0.1);
+    }
+    100% {
+      text-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.5),
+        0 0 20px rgba(96, 165, 250, 0.3),
+        0 0 30px rgba(167, 139, 250, 0.2);
+    }
+  }
+
+  @keyframes glitch-before {
+    0% {
+      transform: translate(0);
+      opacity: 0;
+    }
+    10% {
+      transform: translate(-2px, -1px);
+      opacity: 0.8;
+    }
+    20% {
+      transform: translate(-1px, 1px);
+      opacity: 0.8;
+    }
+    30% {
+      transform: translate(1px, -1px);
+      opacity: 0.8;
+    }
+    40% {
+      transform: translate(-1px, 1px);
+      opacity: 0.8;
+    }
+    50% {
+      transform: translate(2px, -2px);
+      opacity: 0.8;
+    }
+    60% {
+      transform: translate(-2px, 1px);
+      opacity: 0.8;
+    }
+    70% {
+      transform: translate(1px, -1px);
+      opacity: 0.8;
+    }
+    80% {
+      transform: translate(-1px, 2px);
+      opacity: 0.8;
+    }
+    90% {
+      transform: translate(2px, -1px);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translate(0);
+      opacity: 0;
+    }
+  }
+
+  @keyframes glitch-after {
+    0% {
+      transform: translate(0);
+      opacity: 0;
+    }
+    10% {
+      transform: translate(2px, 1px);
+      opacity: 0.8;
+    }
+    20% {
+      transform: translate(1px, -1px);
+      opacity: 0.8;
+    }
+    30% {
+      transform: translate(-1px, 1px);
+      opacity: 0.8;
+    }
+    40% {
+      transform: translate(1px, -1px);
+      opacity: 0.8;
+    }
+    50% {
+      transform: translate(-2px, 2px);
+      opacity: 0.8;
+    }
+    60% {
+      transform: translate(2px, -1px);
+      opacity: 0.8;
+    }
+    70% {
+      transform: translate(-1px, 1px);
+      opacity: 0.8;
+    }
+    80% {
+      transform: translate(1px, -2px);
+      opacity: 0.8;
+    }
+    90% {
+      transform: translate(-2px, 1px);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translate(0);
+      opacity: 0;
+    }
+  }
+
+  /* Glitch text responsive adjustments */
+  @media (max-width: 768px) {
+    .glitch-text::before,
+    .glitch-text::after {
+      font-size: inherit;
+    }
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #2563eb, #7c3aed);
+}
+
+/* Selection styles */
+::selection {
+  background: rgba(59, 130, 246, 0.3);
+  color: white;
+}
+
+::-moz-selection {
+  background: rgba(59, 130, 246, 0.3);
+  color: white;
+}
+
+/* Focus styles */
+*:focus {
+  outline: 2px solid rgba(59, 130, 246, 0.5);
+  outline-offset: 2px;
+}
+
+/* Smooth transitions for all interactive elements */
+a, button, input, textarea, select {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Loading animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background-size: 200px 100%;
+  animation: shimmer 2s infinite;
+}

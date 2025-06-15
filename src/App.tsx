@@ -1,46 +1,59 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Brain, Construction as Connection, Archive as Architecture, Users, Mail, Phone, Github, Linkedin, Workflow, Code2, Menu, X, BrainCircuit, Waypoints, DraftingCompass, Calendar, MessageCircle, Rocket, Instagram, Facebook, Twitter, Send } from 'lucide-react';
-import ReactRotatingText from 'react-rotating-text';
-import LogoSlider from 'react-infinite-logo-slider';
+import React, { useState, useEffect } from 'react';
+import { Brain, Zap, Code2, Users, Mail, Phone, Github, Linkedin, Menu, X, BrainCircuit, Waypoints, DraftingCompass, Calendar, MessageCircle, Rocket, Instagram, Facebook, Twitter, Send, ArrowRight, CheckCircle, Star, Play, Bot } from 'lucide-react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 function App() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [isGlitching, setIsGlitching] = useState(false);
   
   const headerImages = [
-    "https://dusare-338284363.imgix.net/ia.webp?auto=format&fit=crop&q=80&w=2000",
-    "https://dusare-338284363.imgix.net/api2.webp?auto=format&fit=crop&q=80&w=2000",
-    "https://dusare-338284363.imgix.net/architect.webp?auto=format&fit=crop&q=80&w=2000"
+    "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1561736778-92e52a7769ef?auto=format&fit=crop&q=80&w=2000"
   ];
 
+  const rotatingWords = ['Consultora', 'Integraciones', 'Soluciones', 'Innovación', 'Tecnología', 'Agentes IA'];
+
   useEffect(() => {
-    // Initialize AOS
     AOS.init({
-      duration: 800,
+      duration: 1000,
       once: false,
       mirror: true,
-      offset: 100,
-      easing: 'ease-in-out'
+      offset: 50,
+      easing: 'ease-out-cubic'
     });
 
-    // Refresh AOS on window resize
-    window.addEventListener('resize', () => {
-      AOS.refresh();
-    });
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
 
-    const timer = setInterval(() => {
+    const imageTimer = setInterval(() => {
       setCurrentImageIndex((prevIndex) => 
         prevIndex === headerImages.length - 1 ? 0 : prevIndex + 1
       );
-    }, 5000);
+    }, 6000);
+
+    // Rotating text timer
+    const textTimer = setInterval(() => {
+      setCurrentWordIndex((prevIndex) => 
+        prevIndex === rotatingWords.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 2500);
+
+    // Glitch effect timer
+    const glitchTimer = setInterval(() => {
+      setIsGlitching(true);
+      setTimeout(() => setIsGlitching(false), 200);
+    }, 4000);
 
     return () => {
-      clearInterval(timer);
-      window.removeEventListener('resize', () => {
-        AOS.refresh();
-      });
+      clearInterval(imageTimer);
+      clearInterval(textTimer);
+      clearInterval(glitchTimer);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -48,20 +61,18 @@ function App() {
     setIsMenuOpen(false);
   };
 
-  const rotatingWords = ['Consultora', 'Integraciones', 'Soluciones', 'Innovación', 'Tecnología', 'Agentes IA'];
-
   const ias = [
     {
       name: "OpenAI",
-      Image: "https://cdn.brandfetch.io/idR3duQxYl/theme/light/logo.svg?c=1bx1742504365898id64Mup7acJwp1kEwn&t=1718351879861"
+      Image: "https://cdn.brandfetch.io/idR3duQxYl/theme/light/logo.svg"
     },
     {
       name: "Claude",
-      Image: "https://cdn.brandfetch.io/idW5s392j1/theme/light/logo.svg?c=1bx1742506080449id64Mup7acberka77v&t=1738315809319"
+      Image: "https://cdn.brandfetch.io/idW5s392j1/theme/light/logo.svg"
     },
     {
       name: "Meta",
-      Image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Meta_Platforms_Inc._logo.svg/800px-Meta_Platforms_Inc._logo.svg.png"
+      Image: "https://cdn.brandfetch.io/idWvz5T3V7/theme/light/logo.svg"
     },
     {
       name: "Gemini",
@@ -70,6 +81,22 @@ function App() {
     {
       name: "DeepSeek",
       Image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/DeepSeek_logo.svg/512px-DeepSeek_logo.svg.png"
+    },
+    {
+      name: "Anthropic",
+      Image: "https://cdn.brandfetch.io/idmJWF3N06/theme/light/logo.svg"
+    },
+    {
+      name: "xAI Grok",
+      Image: "https://cdn.brandfetch.io/iddjpnb3_W/theme/light/logo.svg"
+    },
+    {
+      name: "Mistral AI",
+      Image: "https://cdn.brandfetch.io/idtiX4Hc7r/theme/dark/logo.svg"
+    },
+    {
+      name: "Qwen AI",
+      Image: "https://cdn.brandfetch.io/id81l88pD2/w/410/h/123/theme/dark/logo.png"
     }
   ];
 
@@ -80,11 +107,11 @@ function App() {
     },
     {
       name: "Make.com",
-      image: "https://cdn.brandfetch.io/idVHU5hl7_/theme/dark/logo.svg?c=1bx1741529786375id64Mup7acu2U5mqir&t=1690469454303"
+      image: "https://cdn.brandfetch.io/idVHU5hl7_/theme/light/logo.svg"
     },
     {
       name: "n8n",
-      image: "https://cdn.brandfetch.io/idO6_6uqJ9/idWtnk-fDo.svg?c=1bx1741530084702id64Mup7ac8XgYuRfh&t=1655217297979"
+      image: "https://cdn.brandfetch.io/idO6_6uqJ9/idWtnk-fDo.svg"
     },
     {
       name: "Node.js",
@@ -92,7 +119,7 @@ function App() {
     },
     {
       name: "Python",
-      image: "https://cdn.brandfetch.io/idbpOFBgcc/theme/dark/logo.svg?c=1bx1741529950238id64Mup7acl4IsW4ab&t=1732459780656"
+      image: "https://cdn.brandfetch.io/idbpOFBgcc/theme/dark/logo.svg"
     },
     {
       name: "Java",
@@ -104,41 +131,8 @@ function App() {
     },
     {
       name: "CloudFlare",
-      image: "https://cdn.brandfetch.io/idJ3Cg8ymG/idASSo3XVu.svg?c=1bx1741530166352id64Mup7acR4KNtmq-&t=1646237667530"
+      image: "https://cdn.brandfetch.io/idJ3Cg8ymG/idASSo3XVu.svg"
     }
-  ];
-
-  const team = [
-    {
-      name: "Juan Manuel Sirito",
-      role: "Arquitecto de sistemas | Experto en integraciones",
-      description: "Soy Ingeniero en Sistemas Informáticos (UAI) con Maestría en Dirección Estratégica Y Tecnología. Soy estratégico y poseo gran capacidad de análisis. Me considero una persona responsable, dinámica y creativa, con facilidad de adaptación, jugador de equipo, con iniciativa para resolutivos eficiente y orientada a objetivo. Deseo desarrollarme en una posición de liderazgo, en el área de sistemas o en la parte comercial de empresas de tecnología o consultoría. Poseo habilidades de dirección, estrategia, negociación, organización y gestión.",
-      image: "https://w1.pngwing.com/pngs/743/500/png-transparent-circle-silhouette-logo-user-user-profile-green-facial-expression-nose-cartoon-thumbnail.png"
-    },
-    {
-      name: "Ariel Sebastian Duarte",
-      role: "Fundador | Arquitecto de Software | Expert Agent AI",
-      description: "Arquitecto de Software, con más de 10 años de experiencia en multi plataformas. Desarrollando en diferentes tecnologías, brindando soporte en todas las etapas del desarrollo de las aplicaciones, tanto de ambientes, migración, integración continua. Teniendo sólidos conocimientos en múltiples plataformas.",
-      image: "https://w1.pngwing.com/pngs/743/500/png-transparent-circle-silhouette-logo-user-user-profile-green-facial-expression-nose-cartoon-thumbnail.png"
-    },
-    {
-      name: "Martin Ariel Duran",
-      role: "Arquitecta de Software | Integraciones y Servicios",
-      description: "con experiencia en el sector público y privado, siempre priorizando el objetivo de mi trabajo colaborar en brindar servicio mejor, desde la parte técnica con mis conocimientos o brindando ideas y realizando las investigaciones necesarias, así como acompañando y mejorando las gestiones necesarias internas y a veces un poquito entrometido ;)",
-      image: "https://w1.pngwing.com/pngs/743/500/png-transparent-circle-silhouette-logo-user-user-profile-green-facial-expression-nose-cartoon-thumbnail.png"
-    },
-    {
-      name: "Heydelberth Rodriguez",
-      role: "Mulesoft Senior Developer | Senior Developer | Integrador | Developer | Mule",
-      description: "Ingeniero de software con 8+ años de experiencia en desarrollo y despliegue de soluciones tecnológicas. Especialista en aplicaciones web, móviles y soluciones empresariales. Liderazgo en equipos multidisciplinarios y colaboración con stakeholders. Manejo de Java, PHP, .NET, JavaScript, Python, entre otros. Enfoque en excelencia técnica, innovación y entrega puntual. 🎓 Formación en desarrollo y diseño de aplicaciones, con compromiso continuo de aprendizaje.",
-      image: "https://w1.pngwing.com/pngs/743/500/png-transparent-circle-silhouette-logo-user-user-profile-green-facial-expression-nose-cartoon-thumbnail.png"
-    }
-  ];
-
-  const clients = [
-    "https://static-00.iconduck.com/assets.00/amazon-icon-2048x1722-myhuicq8.png",
-    "https://cdn.iconscout.com/icon/free/png-256/free-nvidia-282591.png?f=webp",
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Netflix_icon.svg/1200px-Netflix_icon.svg.png"
   ];
 
   const services = [
@@ -183,13 +177,25 @@ function App() {
         "Arquitecturas cloud-native y serverless",
         "Consultoría en mejores prácticas de desarrollo"
       ]
+    },
+    {
+      icon: Bot,
+      title: "Automatizaciones y Soluciones con IA",
+      shortDesc: "Automatización inteligente de procesos empresariales con IA",
+      image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=400",
+      detailedDesc: [
+        "Automatización de procesos de negocio con IA (RPA + AI)",
+        "Chatbots y asistentes virtuales inteligentes",
+        "Análisis automático de documentos y datos",
+        "Sistemas de clasificación y etiquetado automático",
+        "Automatización de workflows complejos",
+        "Integración de IA en procesos existentes"
+      ]
     }
   ];
 
-  // Social media links
   const socialLinks = [
     { name: "GitHub", icon: Github, url: "https://github.com/dusare", color: "hover:text-gray-300" },
-  //  { name: "LinkedIn", icon: Linkedin, url: "https://linkedin.com", color: "hover:text-blue-500" },
     { name: "Instagram", icon: Instagram, url: "https://www.instagram.com/dusare_ia/", color: "hover:text-pink-500" },
     { name: "Facebook", icon: Facebook, url: "https://www.facebook.com/share/17vjMMv57u/", color: "hover:text-blue-600" },
     { name: "x.com", icon: X, url: "https://x.com/Dusare_ia", color: "hover:text-blue-400" },
@@ -197,160 +203,242 @@ function App() {
     { name: "Telegram", icon: Send, url: "https://t.me/dusare_ia", color: "hover:text-blue-300" }
   ];
 
+  const stats = [
+    { number: "50+", label: "Proyectos Completados" },
+    { number: "98%", label: "Satisfacción del Cliente" },
+    { number: "24/7", label: "Soporte Técnico" },
+    { number: "5+", label: "Años de Experiencia" }
+  ];
+
   return (
-    <div className="min-h-screen bg-gray-900">
-      <header className="relative bg-cover bg-center h-screen transition-all duration-1000 ease-in-out"
-        style={{
-          backgroundImage: `url("${headerImages[currentImageIndex]}")`,
-        }}>
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-900/90 via-gray-900/70 to-gray-900/90"></div>
-        
-        <div className="relative h-full">
-          <nav className="container mx-auto px-10 py-4">
-            <div className="flex justify-between items-center">
-              <div className="flex items-center space-x-3 z-50">
-                <blockquote className="text-center text-4xl font-semibold text-gray-900 italic dark:text-white">
-                  <span className="relative inline-block before:absolute before:-inset-1 before:block before:-skew-y-3 before:bg-cyan-500">
-                    <span className="relative text-white dark:text-gray-950">Dusare</span>
+    <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden">
+      {/* Navigation */}
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrollY > 50 ? 'bg-slate-950/95 backdrop-blur-xl border-b border-slate-800/50' : 'bg-transparent'
+      }`}>
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center space-x-4">
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg blur opacity-75"></div>
+                <div className="relative bg-slate-950 px-4 py-2 rounded-lg border border-slate-700">
+                  <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                    Dusare
                   </span>
-                  &nbsp;
-                  <span className="text-white">
-                    <ReactRotatingText items={rotatingWords} />
-                  </span>
-                </blockquote>
-              </div>
-
-              <button 
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="md:hidden z-50 text-white hover:text-cyan-400 transition-colors"
-              >
-                {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </button>
-
-              <div className={`
-                fixed inset-0 bg-gray-900/95 backdrop-blur-sm transform transition-transform duration-300 ease-in-out
-                ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}
-                md:hidden flex items-center justify-center
-              `}>
-                <div className="flex flex-col items-center space-y-8">
-                  <a href="#quienes-somos" 
-                     onClick={handleNavClick}
-                     className="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors">
-                    Quienes Somos
-                  </a>
-                  <a href="#servicios" 
-                     onClick={handleNavClick}
-                     className="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors">
-                    Servicios
-                  </a>
-                  <a href="#como-empezar" 
-                     onClick={handleNavClick}
-                     className="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors">
-                    Cómo Empezar
-                  </a>
-{/*
-                  <a href="#equipo" 
-                     onClick={handleNavClick}
-                     className="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors">
-                    Equipo
-                  </a>
-*/}
                 </div>
               </div>
-
-              <div className="hidden md:flex space-x-4">
-                <a href="#quienes-somos" 
-                   className="px-4 py-2 rounded-full bg-gradient-to-r from-cyan-400/10 to-purple-500/10 text-white border border-transparent hover:border-cyan-400/30 transition-all duration-300 hover:from-cyan-400/20 hover:to-purple-500/20">
-                  Quienes Somos
-                </a>
-                <a href="#servicios" 
-                   className="px-4 py-2 rounded-full bg-gradient-to-r from-cyan-400/10 to-purple-500/10 text-white border border-transparent hover:border-cyan-400/30 transition-all duration-300 hover:from-cyan-400/20 hover:to-purple-500/20">
-                  Servicios
-                </a>
-                <a href="#como-empezar" 
-                   className="px-4 py-2 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 text-white hover:opacity-90 transition-opacity">
-                  Cómo Empezar
-                </a>
-{/*
-                <a href="#equipo" 
-                   className="px-4 py-2 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 text-white hover:opacity-90 transition-opacity">
-                  Equipo
-                </a>
-*/}
+              <div className="hidden md:block">
+                <div className="relative h-8 flex items-center min-w-[140px]">
+                  <span 
+                    key={currentWordIndex}
+                    className="text-lg font-medium bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-fade-in-up"
+                    style={{
+                      filter: 'drop-shadow(0 0 8px rgba(96, 165, 250, 0.3))'
+                    }}
+                  >
+                    {rotatingWords[currentWordIndex]}
+                  </span>
+                </div>
               </div>
             </div>
-          </nav>
-          
-          <div className="container mx-auto px-6 flex items-center justify-center h-[calc(100vh-5rem)]">
-            <div className="text-center max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="200">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 px-4">
-                Soluciones Tecnológicas Innovadoras
-              </h1>
-              <p className="text-lg sm:text-xl md:text-2xl mb-6 md:mb-8 text-white/90 px-4">
-                Expertos en IA, Integraciones y Arquitectura de Software
-              </p>
-              
+
+            <button 
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden relative z-50 p-2 rounded-lg bg-slate-800/50 backdrop-blur-sm border border-slate-700 hover:bg-slate-700/50 transition-all duration-300"
+            >
+              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+
+            {/* Mobile Menu */}
+            <div className={`
+              fixed inset-0 bg-slate-950/98 backdrop-blur-xl transform transition-all duration-500 ease-out
+              ${isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}
+              md:hidden flex items-center justify-center
+            `}>
+              <div className="flex flex-col items-center space-y-8 text-center">
+                {['Quienes Somos', 'Servicios', 'Cómo Empezar'].map((item, index) => (
+                  <a 
+                    key={item}
+                    href={`#${item.toLowerCase().replace(/\s+/g, '-').replace('ó', 'o')}`}
+                    onClick={handleNavClick}
+                    className="text-2xl font-medium text-slate-300 hover:text-white transition-all duration-300 transform hover:scale-105"
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
+                    {item}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Desktop Menu */}
+            <div className="hidden md:flex items-center space-x-1">
+              {[
+                { name: 'Quienes Somos', href: '#quienes-somos' },
+                { name: 'Servicios', href: '#servicios' },
+                { name: 'Cómo Empezar', href: '#como-empezar' }
+              ].map((item) => (
+                <a 
+                  key={item.name}
+                  href={item.href}
+                  className="px-4 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/50 transition-all duration-300 relative group"
+                >
+                  {item.name}
+                  <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 group-hover:w-full transition-all duration-300"></div>
+                </a>
+              ))}
               <a 
                 href="#como-empezar"
-                className="inline-block bg-gradient-to-r from-cyan-400 to-purple-500 text-white px-8 py-4 rounded-full font-semibold hover:opacity-90 transition-all duration-300"
+                className="ml-4 px-6 py-2.5 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 transition-all duration-300 font-medium shadow-lg hover:shadow-blue-500/25 transform hover:scale-105"
               >
-                Comenzar Ahora
+                Comenzar
               </a>
             </div>
           </div>
         </div>
-      </header>
+      </nav>
 
-      <section id="servicios" className="py-20 bg-gray-900">
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 transition-all duration-1000 ease-in-out">
+          <img 
+            src={headerImages[currentImageIndex]}
+            alt="Hero background"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-950/90 via-slate-950/70 to-slate-950/90"></div>
+        </div>
+        
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        </div>
+
+        <div className="relative z-10 container mx-auto px-6 text-center">
+          <div className="max-w-5xl mx-auto" data-aos="fade-up" data-aos-duration="1200">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 mb-8">
+              <Star className="w-4 h-4 text-yellow-400 mr-2" />
+              <span className="text-sm text-slate-300">Soluciones Tecnológicas de Vanguardia</span>
+            </div>
+            
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+              <span 
+                className={`glitch-text ${isGlitching ? 'glitch-active' : ''}`}
+                data-text="Transformamos tu negocio con"
+              >
+                Transformamos tu negocio con
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Inteligencia Artificial
+              </span>
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+              Creamos soluciones que impulsan la innovación y el crecimiento.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <a 
+                href="#como-empezar"
+                className="group px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 transition-all duration-300 font-semibold shadow-2xl hover:shadow-blue-500/25 transform hover:scale-105 flex items-center"
+              >
+                Comenzar Ahora
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+              </a>
+              <a 
+                href="#servicios"
+                className="group px-8 py-4 rounded-xl bg-slate-800/50 backdrop-blur-sm border border-slate-700 hover:bg-slate-700/50 transition-all duration-300 font-semibold flex items-center"
+              >
+                <Play className="w-5 h-5 mr-2" />
+                Ver Servicios
+              </a>
+            </div>
+          </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="400">
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-2">
+                  {stat.number}
+                </div>
+                <div className="text-slate-400 text-sm md:text-base">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-slate-400 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-slate-400 rounded-full mt-2 animate-pulse"></div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section id="servicios" className="py-24 bg-gradient-to-b from-slate-950 to-slate-900">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500" data-aos="fade-up">
-            Nuestros Servicios
-          </h2>
-          <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
+          <div className="text-center mb-20" data-aos="fade-up">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 mb-6">
+              <Zap className="w-4 h-4 text-blue-400 mr-2" />
+              <span className="text-sm text-slate-300">Nuestros Servicios</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+              Soluciones que Impulsan el Futuro
+            </h2>
+            <p className="text-xl text-slate-400 max-w-3xl mx-auto">
+              Transformamos ideas en realidad con tecnología de vanguardia y experiencia comprobada
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-8 max-w-7xl mx-auto">
             {services.map((service, index) => {
               const Icon = service.icon;
               return (
-                <div key={index} className="group min-h-[500px] h-full [perspective:1000px]" data-aos="fade-up" data-aos-delay={index * 100}>
-                  <div className="relative h-full w-full rounded-xl transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
-                    {/* Front of the card */}
-                    <div className="absolute inset-0">
-                      <div className="h-full w-full rounded-xl bg-gray-800 p-6 sm:p-8 shadow-xl shadow-cyan-400/10 flex flex-col items-center">
-                        <Icon className="w-12 sm:w-16 h-12 sm:h-16 text-cyan-400 mb-4" />
-                        <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-white text-center">{service.title}</h3>
-                        <p className="text-gray-300 mb-4 text-center text-sm sm:text-base">{service.shortDesc}</p>
-                        <img 
-                          src={service.image}
-                          alt={service.title}
-                          className="rounded-lg mt-auto w-full h-36 sm:h-48 object-cover"
-                        />
+                <div 
+                  key={index} 
+                  className="group relative h-full"
+                  data-aos="fade-up" 
+                  data-aos-delay={index * 150}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                  <div className="relative h-full bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 hover:border-slate-600/50 transition-all duration-500 group-hover:transform group-hover:scale-105 flex flex-col">
+                    <div className="flex items-center mb-4">
+                      <div className="p-3 rounded-xl bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30">
+                        <Icon className="w-6 h-6 text-blue-400" />
                       </div>
+                      <h3 className="text-lg font-bold ml-3 text-white">{service.title}</h3>
                     </div>
                     
-                    {/* Back of the card */}
-                    <div className="absolute inset-0 h-full w-full rounded-xl bg-gray-800 px-4 sm:px-8 py-4 sm:py-6 [transform:rotateY(180deg)] [backface-visibility:hidden] overflow-y-auto">
-                      <div className="flex flex-col h-full">
-                        <div className="flex-grow">
-                          <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-center text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
-                            {service.title}
-                          </h3>
-                          <ul className="space-y-2 sm:space-y-3 text-gray-300 text-xs sm:text-sm">
-                            {service.detailedDesc.map((desc, i) => (
-                              <li key={i} className="flex items-start">
-                                <span className="inline-block w-1.5 h-1.5 rounded-full bg-cyan-400 mt-1.5 mr-2 flex-shrink-0"></span>
-                                <span className="leading-relaxed">{desc}</span>
-                              </li>
-                            ))}
-                          </ul>
+                    <p className="text-slate-300 mb-4 leading-relaxed text-sm">{service.shortDesc}</p>
+                    
+                    <div className="mb-4">
+                      <img 
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-32 object-cover rounded-xl opacity-80 group-hover:opacity-100 transition-all duration-500"
+                      />
+                    </div>
+
+                    <div className="space-y-2 mb-6 flex-grow">
+                      {service.detailedDesc.slice(0, 3).map((desc, i) => (
+                        <div key={i} className="flex items-start">
+                          <CheckCircle className="w-4 h-4 text-green-400 mt-0.5 mr-2 flex-shrink-0" />
+                          <span className="text-slate-300 text-xs leading-relaxed">{desc}</span>
                         </div>
-                        <div className="pt-4 sm:pt-6 mt-auto">
-                          <a 
-                            href="https://wa.me/541170601388?text=Te+damos+la+bienvenida+a+Dusare." 
-                            className="block text-center w-full px-4 sm:px-6 py-2.5 sm:py-3 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 text-white text-sm sm:text-base font-semibold hover:opacity-90 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-cyan-400/20"
-                          >
-                            Consultar Ahora
-                          </a>
-                        </div>
-                      </div>
+                      ))}
+                    </div>
+
+                    <div className="mt-auto">
+                      <a 
+                        href="https://wa.me/541170601388?text=Te+damos+la+bienvenida+a+Dusare." 
+                        className="group/btn w-full px-4 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 transition-all duration-300 font-semibold text-center block shadow-lg hover:shadow-blue-500/25 transform hover:scale-105 text-sm"
+                      >
+                        Consultar Ahora
+                        <ArrowRight className="w-3 h-3 inline ml-2 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -360,127 +448,157 @@ function App() {
         </div>
       </section>
 
-      <section id="como-empezar" className="py-20 bg-gray-800">
+      {/* How to Start Section */}
+      <section id="como-empezar" className="py-24 bg-slate-900">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500" data-aos="fade-up">
-            Cómo Empezar
-          </h2>
-          <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-20" data-aos="fade-up">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 mb-6">
+              <Rocket className="w-4 h-4 text-purple-400 mr-2" />
+              <span className="text-sm text-slate-300">Proceso Simple</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+              Cómo Empezar tu Transformación
+            </h2>
+            <p className="text-xl text-slate-400 max-w-3xl mx-auto">
+              Un proceso simple y efectivo para llevar tu negocio al siguiente nivel
+            </p>
+          </div>
+
+          <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-gray-900 rounded-xl p-8 relative" data-aos="fade-right" data-aos-delay="100">
-                <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full flex items-center justify-center text-2xl font-bold text-white">
-                  1
-                </div>
-                <h3 className="text-xl font-semibold mb-4 text-white pl-6">Hablanos por privado</h3>
-                <p className="text-gray-300 mb-6">
-                  Cuéntanos sobre tu proyecto o necesidad. Analizaremos si podemos ayudarte y cómo podemos agregar valor a tu negocio.
-                </p>
-                <a 
-                  href="https://wa.me/541170601388?text=Realiza+tu+consulta."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 text-cyan-400 hover:text-purple-500 transition-colors"
-                >
-                  <MessageCircle className="w-5 h-5" />
-                  <span>Iniciar conversación</span>
-                </a>
-              </div>
-
-              <div className="bg-gray-900 rounded-xl p-8 relative" data-aos="fade-left" data-aos-delay="200">
-                <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full flex items-center justify-center text-2xl font-bold text-white">
-                  2
-                </div>
-                <h3 className="text-xl font-semibold mb-4 text-white pl-6">Empecemos la Consultoría</h3>
-                <p className="text-gray-300 mb-6">
-                  Agendamos una llamada estratégica para analizar en profundidad los procesos de tu negocio y diseñar la mejor solución.
-                </p>
-                <a 
-                  href="https://cal.com/dusare/calendar"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 text-cyan-400 hover:text-purple-500 transition-colors"
-                >
-                  <Calendar className="w-5 h-5" />
-                  <span>Agendar llamada</span>
-                </a>
-              </div>
-          
-              <div className="bg-gray-900 rounded-xl p-8 relative" data-aos="fade-right" data-aos-delay="300">
-                <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full flex items-center justify-center text-2xl font-bold text-white">
-                  3
-                </div>
-                <h3 className="text-xl font-semibold mb-4 text-white pl-6">Back Office Inteligente</h3>
-                <p className="text-gray-300 mb-6">
-                Te prepararemos un entregable con todas las soluciones de IA aplicables a tu negocio y los beneficios que obtendrás.
-                </p>
-                <a 
-                  href="https://cal.com/dusare/calendar"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 text-cyan-400 hover:text-purple-500 transition-colors"
-                >
-                  <Calendar className="w-5 h-5" />
-                  <span>Agendar reunion</span>
-                </a>
-              </div>
-
-              <div className="bg-gray-900 rounded-xl p-8 relative" data-aos="fade-left" data-aos-delay="400">
-                <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full flex items-center justify-center text-2xl font-bold text-white">
-                  4
-                </div>
-                <h3 className="text-xl font-semibold mb-4 text-white pl-6">IA a Medida</h3>
-                <p className="text-gray-300 mb-6">
-                Finalmente, acordaremos iniciar el desarrollo de soluciones de IA a medida y te brindaremos acceso a recursos exclusivos de software ya disponibles, garantizando que el entregable cumple plenamente con todos los requerimientos establecidos.
-                </p>
-                <a 
-                  href="https://cal.com/dusare/calendar"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 text-cyan-400 hover:text-purple-500 transition-colors"
-                >
-                  <Rocket className="w-5 h-5" />
-                  <span>Solicita tu proyecto</span>
-                </a>
-              </div>
+              {[
+                {
+                  step: "01",
+                  title: "Conversación Inicial",
+                  description: "Cuéntanos sobre tu proyecto o necesidad. Analizaremos si podemos ayudarte y cómo podemos agregar valor a tu negocio.",
+                  action: "Iniciar conversación",
+                  link: "https://wa.me/541170601388?text=Realiza+tu+consulta.",
+                  icon: MessageCircle,
+                  color: "from-blue-500 to-cyan-500"
+                },
+                {
+                  step: "02",
+                  title: "Consultoría Estratégica",
+                  description: "Agendamos una llamada estratégica para analizar en profundidad los procesos de tu negocio y diseñar la mejor solución.",
+                  action: "Agendar llamada",
+                  link: "https://cal.com/dusare/calendar",
+                  icon: Calendar,
+                  color: "from-purple-500 to-pink-500"
+                },
+                {
+                  step: "03",
+                  title: "Back Office Inteligente",
+                  description: "Te prepararemos un entregable con todas las soluciones de IA aplicables a tu negocio y los beneficios que obtendrás.",
+                  action: "Agendar reunión",
+                  link: "https://cal.com/dusare/calendar",
+                  icon: Brain,
+                  color: "from-green-500 to-emerald-500"
+                },
+                {
+                  step: "04",
+                  title: "IA a Medida",
+                  description: "Finalmente, acordaremos iniciar el desarrollo de soluciones de IA a medida y te brindaremos acceso a recursos exclusivos de software ya disponibles.",
+                  action: "Solicita tu proyecto",
+                  link: "https://cal.com/dusare/calendar",
+                  icon: Rocket,
+                  color: "from-orange-500 to-red-500"
+                }
+              ].map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <div 
+                    key={index} 
+                    className="group relative"
+                    data-aos="fade-up" 
+                    data-aos-delay={index * 150}
+                  >
+                    <div className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-0 group-hover:opacity-10 rounded-2xl blur-xl transition-all duration-500`}></div>
+                    <div className="relative bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-8 hover:border-slate-600/50 transition-all duration-500 group-hover:transform group-hover:scale-105">
+                      <div className="flex items-start mb-6">
+                        <div className={`flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-r ${item.color} flex items-center justify-center text-white font-bold text-lg mr-4`}>
+                          {item.step}
+                        </div>
+                        <div className="flex-grow">
+                          <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+                          <Icon className={`w-6 h-6 bg-gradient-to-r ${item.color} text-transparent`} />
+                        </div>
+                      </div>
+                      
+                      <p className="text-slate-300 mb-6 leading-relaxed">{item.description}</p>
+                      
+                      <a 
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`group/btn inline-flex items-center px-6 py-3 rounded-xl bg-gradient-to-r ${item.color} hover:opacity-90 transition-all duration-300 font-semibold text-white shadow-lg transform hover:scale-105`}
+                      >
+                        {item.action}
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                      </a>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-gray-900">
+      {/* AI Partners Section */}
+      <section className="py-24 bg-gradient-to-b from-slate-900 to-slate-950">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500" data-aos="fade-up">
-            Inteligencia Artificial utilizadas
-          </h2>
-          <div className="flex justify-center items-center space-x-12 flex-wrap" data-aos="fade-up" data-aos-delay="200">
+          <div className="text-center mb-16" data-aos="fade-up">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+              Inteligencia Artificial Utilizada
+            </h2>
+            <p className="text-slate-400 max-w-2xl mx-auto">
+              Trabajamos con las mejores plataformas de IA del mercado
+            </p>
+          </div>
+          
+          <div className="flex justify-center items-center flex-wrap gap-12" data-aos="fade-up" data-aos-delay="200">
             {ias.map((ia, index) => (
-              <img 
+              <div 
                 key={index}
-                src={ia.Image}
-                alt={`Cliente ${index + 1}`}
-                className="w-40 h-40 h-16 object-contain grayscale hover:grayscale-0 transition-all"
+                className="group relative"
                 data-aos="zoom-in"
                 data-aos-delay={100 * (index + 1)}
-              />
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                <div className="relative p-6 bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-2xl hover:border-slate-600/50 transition-all duration-500 group-hover:transform group-hover:scale-110">
+                  <img 
+                    src={ia.Image}
+                    alt={ia.name}
+                    className="w-24 h-24 object-contain filter brightness-90 group-hover:brightness-110 transition-all duration-500"
+                  />
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="quienes-somos" className="py-20 bg-gray-800">
+      {/* About Section */}
+      <section id="quienes-somos" className="py-24 bg-slate-950">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500" data-aos="fade-up">
-            Sobre Nosotros
-          </h2>
-          <div className="max-w-3xl mx-auto text-center" data-aos="fade-up" data-aos-delay="200">
-            <p className="text-lg text-gray-300 mb-8">
+          <div className="max-w-4xl mx-auto text-center" data-aos="fade-up">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 mb-8">
+              <Users className="w-4 h-4 text-green-400 mr-2" />
+              <span className="text-sm text-slate-300">Sobre Nosotros</span>
+            </div>
+            
+            <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+              Expertos en Transformación Digital
+            </h2>
+            
+            <p className="text-xl text-slate-300 mb-12 leading-relaxed">
               Somos un equipo de expertos apasionados por la tecnología y la innovación. 
               Nos especializamos en crear soluciones tecnológicas que impulsan la transformación 
               digital de nuestros clientes mediante la implementación de IA avanzada, 
               integraciones empresariales robustas y arquitecturas de software escalables.
             </p>
             
-            <div className="flex flex-wrap justify-center gap-4 mb-8" data-aos="fade-up" data-aos-delay="300">
+            <div className="flex flex-wrap justify-center gap-6 mb-12" data-aos="fade-up" data-aos-delay="300">
               {socialLinks.map((social, index) => {
                 const Icon = social.icon;
                 return (
@@ -489,12 +607,11 @@ function App() {
                     href={social.url} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className={`text-gray-400 ${social.color} transition-colors duration-300 transform hover:scale-110 flex flex-col items-center`}
+                    className={`group p-4 rounded-xl bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 hover:border-slate-600/50 ${social.color} transition-all duration-300 transform hover:scale-110`}
                     data-aos="zoom-in"
                     data-aos-delay={50 * (index + 1)}
                   >
-                    <Icon className="w-8 h-8 mb-1" />
-                    <span className="text-xs">{social.name}</span>
+                    <Icon className="w-6 h-6" />
                   </a>
                 );
               })}
@@ -502,80 +619,64 @@ function App() {
           </div>
         </div>
       </section>
-{/*
-      <section id="equipo" className="py-20 bg-gray-900">
+
+      {/* Tools Section */}
+      <section className="py-24 bg-gradient-to-b from-slate-950 to-slate-900">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
-            Nuestro Equipo
-          </h2>
-          <div className="grid md:grid-cols-4 gap-8">
-            {team.map((member, index) => (
-              <div key={index} className="text-center bg-gray-800 p-6 rounded-lg">
-                <img 
-                  src={member.image} 
-                  alt={member.name}
-                  className="w-32 h-32 rounded-full mx-auto mb-4 object-cover ring-2 ring-cyan-400"
-                />
-                <h3 className="text-xl font-semibold mb-2 text-white">{member.name}</h3>
-                <p className="text-cyan-400 mb-2">{member.role}</p>
-                <p className="text-gray-400 text-sm">{member.description}</p>
-              </div>
-            ))}
+          <div className="text-center mb-16" data-aos="fade-up">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+              Herramientas y Tecnologías
+            </h2>
+            <p className="text-slate-400 max-w-2xl mx-auto">
+              Utilizamos las mejores herramientas del mercado para crear soluciones robustas
+            </p>
           </div>
-        </div>
-      </section>
-*/}
-{/*
-      <section className="py-20 bg-gray-800">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
-            Nuestros Clientes
-          </h2>
-          <div className="flex justify-center items-center space-x-12 flex-wrap">
-            {clients.map((client, index) => (
-              <img 
-                key={index}
-                src={client}
-                alt={`Cliente ${index + 1}`}
-                className="h-16 object-contain grayscale hover:grayscale-0 transition-all"
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-*/}
-      <section className="py-20 bg-gray-900">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500" data-aos="fade-up">
-            Herramientas y Tecnologías Usadas
-          </h2>
-          <div className="w-full max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="200">
-            <LogoSlider
-              width="200px"
-              duration={40}
-              pauseOnHover={true}
-              blurBorders={false}
-             
-            >
+          
+          <div className="w-full max-w-6xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+            <div className="flex flex-wrap justify-center items-center gap-8">
               {tools.map((tool, index) => (
-                <LogoSlider.Slide
+                <div 
                   key={index}
+                  className="group relative"
+                  data-aos="zoom-in"
+                  data-aos-delay={100 * (index + 1)}
                 >
-                    <img
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                  <div className="relative p-6 bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-2xl hover:border-slate-600/50 transition-all duration-500 group-hover:transform group-hover:scale-110">
+                    <img 
                       src={tool.image}
                       alt={tool.name}
-                      className="h-20 w-20 object-contain mb-4 filter brightness-100 hover:brightness-110"
+                      className="h-16 w-16 object-contain filter brightness-75 group-hover:brightness-100 transition-all duration-500"
                     />
-                </LogoSlider.Slide>
+                  </div>
+                </div>
               ))}
-            </LogoSlider>
+            </div>
           </div>
         </div>
       </section>
       
-      <footer className="bg-gray-900 text-white py-8">
-        <div className="container mx-auto px-6 text-center">
-          <p className="text-gray-400">&copy; 2025 Dusare Consult. Todos los derechos reservados.</p>
+      {/* Footer */}
+      <footer className="bg-slate-950 border-t border-slate-800/50 py-12">
+        <div className="container mx-auto px-6">
+          <div className="text-center">
+            <div className="flex items-center justify-center space-x-3 mb-6">
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg blur opacity-75"></div>
+                <div className="relative bg-slate-950 px-4 py-2 rounded-lg border border-slate-700">
+                  <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                    Dusare
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p className="text-slate-400 mb-6">
+              Transformando el futuro con tecnología inteligente
+            </p>
+            <p className="text-slate-500 text-sm">
+              &copy; 2025 Dusare Consult. Todos los derechos reservados.
+            </p>
+          </div>
         </div>
       </footer>
     </div>
