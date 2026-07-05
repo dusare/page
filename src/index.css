@@ -647,7 +647,7 @@ a, button, input, textarea, select {
 
   .rb-grid-plane {
     transform: perspective(800px) rotateX(62deg) translateY(-150px) scale(1.65);
-    opacity: 0.42;
+    opacity: 0.22;
   }
 
   .rb-orb {
@@ -656,12 +656,13 @@ a, button, input, textarea, select {
   }
 
   .rb-strands-layer {
-    left: 58%;
-    top: 30%;
-    width: 118vw;
-    height: 340px;
-    min-height: 260px;
-    opacity: 0.7;
+    display: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .rb-strands-layer {
+    display: none;
   }
 }
 

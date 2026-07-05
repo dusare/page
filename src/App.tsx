@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   ArrowRight,
   BadgeCheck,
@@ -369,8 +369,21 @@ function SectionIntro({
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [canRenderStrands, setCanRenderStrands] = useState(() =>
+    typeof window !== 'undefined' ? window.matchMedia('(min-width: 1024px)').matches : false,
+  );
 
   const closeMenu = () => setIsMenuOpen(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 1024px)');
+    const handleChange = () => setCanRenderStrands(mediaQuery.matches);
+
+    handleChange();
+    mediaQuery.addEventListener('change', handleChange);
+
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
 
   return (
     <div className="reactbits-theme min-h-screen text-white">
@@ -456,27 +469,29 @@ function App() {
               alt="Arquitectura tecnológica y codigo en pantalla"
               className="h-full w-full object-cover opacity-[0.045]"
             />
-            <div className="rb-strands-layer" aria-hidden="true">
-              <Strands
-                colors={['#F97316', '#7C3AED', '#06B6D4']}
-                count={3}
-                speed={0.5}
-                amplitude={1}
-                waviness={1}
-                thickness={0.7}
-                glow={2.6}
-                taper={3}
-                spread={1}
-                intensity={0.6}
-                saturation={1.5}
-                opacity={1}
-                scale={1.5}
-                glass={false}
-                refraction={1}
-                dispersion={1}
-                glassSize={1}
-              />
-            </div>
+            {canRenderStrands ? (
+              <div className="rb-strands-layer" aria-hidden="true">
+                <Strands
+                  colors={['#F97316', '#7C3AED', '#06B6D4']}
+                  count={3}
+                  speed={0.5}
+                  amplitude={1}
+                  waviness={1}
+                  thickness={0.7}
+                  glow={2.6}
+                  taper={3}
+                  spread={1}
+                  intensity={0.6}
+                  saturation={1.5}
+                  opacity={1}
+                  scale={1.5}
+                  glass={false}
+                  refraction={1}
+                  dispersion={1}
+                  glassSize={1}
+                />
+              </div>
+            ) : null}
             <div className="rb-grid-plane" aria-hidden="true" />
             <div className="rb-orb rb-orb-one" aria-hidden="true" />
             <div className="rb-orb rb-orb-two" aria-hidden="true" />
