@@ -372,11 +372,12 @@ function App() {
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
-      <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-slate-950/90 backdrop-blur">
+    <div className="reactbits-theme min-h-screen text-white">
+      <div className="site-noise" aria-hidden="true" />
+      <header className="rb-header fixed left-0 right-0 top-0 z-50 border-b border-white/10">
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
           <a href="#" className="flex items-center gap-3" aria-label="Dusare">
-            <span className="grid h-10 w-10 place-items-center rounded-lg border border-cyan-300/30 bg-cyan-300/10">
+            <span className="rb-logo grid h-10 w-10 place-items-center rounded-lg border border-cyan-300/30 bg-cyan-300/10">
               <Sparkles className="h-5 w-5 text-cyan-300" />
             </span>
             <span className="flex flex-col leading-tight">
@@ -390,7 +391,7 @@ function App() {
               <a
                 key={item.href}
                 href={item.href}
-                className="rounded-md px-3 py-2 text-sm font-medium text-slate-300 hover:bg-white/5 hover:text-white"
+                className="rb-nav-link rounded-md px-3 py-2 text-sm font-medium text-slate-300 hover:text-white"
               >
                 {item.label}
               </a>
@@ -402,7 +403,7 @@ function App() {
               href={CALENDAR_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-md border border-cyan-300/30 bg-cyan-300 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-cyan-200"
+              className="rb-button rb-button-primary inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm font-semibold"
             >
               <Calendar className="h-4 w-4" />
               Solicitar diagnóstico
@@ -411,7 +412,7 @@ function App() {
 
           <button
             type="button"
-            className="rounded-md border border-white/10 p-2 text-slate-200 md:hidden"
+            className="rb-icon-button rounded-md border border-white/10 p-2 text-slate-200 md:hidden"
             onClick={() => setIsMenuOpen((value) => !value)}
             aria-label="Abrir menu"
           >
@@ -420,14 +421,14 @@ function App() {
         </nav>
 
         {isMenuOpen ? (
-          <div className="border-t border-white/10 bg-slate-950 px-4 py-4 md:hidden">
+          <div className="rb-mobile-menu border-t border-white/10 px-4 py-4 md:hidden">
             <div className="flex flex-col gap-2">
               {navItems.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
                   onClick={closeMenu}
-                  className="rounded-md px-3 py-2 text-sm font-medium text-slate-200 hover:bg-white/5"
+                  className="rb-nav-link rounded-md px-3 py-2 text-sm font-medium text-slate-200"
                 >
                   {item.label}
                 </a>
@@ -436,7 +437,7 @@ function App() {
                 href={CALENDAR_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2 inline-flex items-center justify-center gap-2 rounded-md bg-cyan-300 px-4 py-2 text-sm font-semibold text-slate-950"
+                className="rb-button rb-button-primary mt-2 inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-semibold"
               >
                 <Calendar className="h-4 w-4" />
                 Solicitar diagnóstico
@@ -447,23 +448,25 @@ function App() {
       </header>
 
       <main>
-        <section className="relative overflow-hidden pt-28">
+        <section className="rb-hero relative overflow-hidden pt-28">
           <div className="absolute inset-0">
             <img
               src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&q=80&w=2000"
               alt="Arquitectura tecnológica y codigo en pantalla"
-              className="h-full w-full object-cover opacity-24"
+              className="h-full w-full object-cover opacity-[0.08]"
             />
-            <div className="absolute inset-0 bg-slate-950/86" />
+            <div className="rb-grid-plane" aria-hidden="true" />
+            <div className="rb-orb rb-orb-one" aria-hidden="true" />
+            <div className="rb-orb rb-orb-two" aria-hidden="true" />
           </div>
 
           <div className="relative mx-auto grid max-w-7xl gap-12 px-4 pb-16 pt-10 sm:px-6 sm:pb-20 lg:grid-cols-[1.08fr_0.92fr] lg:px-8 lg:pb-24 lg:pt-16">
             <div className="flex flex-col justify-center">
-              <p className="mb-5 inline-flex w-fit items-center gap-2 rounded-md border border-cyan-300/30 bg-cyan-300/10 px-3 py-2 text-sm font-semibold text-cyan-200">
+              <p className="rb-chip mb-5 inline-flex w-fit items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-cyan-200">
                 <BadgeCheck className="h-4 w-4" />
                 Consultora boutique founder-led de IA aplicada
               </p>
-              <h1 className="max-w-4xl text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
+              <h1 className="rb-title max-w-4xl text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
                 IA aplicada a procesos reales, no demos aisladas
               </h1>
               <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-200 sm:text-xl">
@@ -482,14 +485,14 @@ function App() {
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-md bg-cyan-300 px-5 py-3 text-sm font-semibold text-slate-950 hover:bg-cyan-200"
+                  className="rb-button rb-button-primary inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold"
                 >
                   Solicitar diagnóstico IA
                   <ArrowRight className="h-4 w-4" />
                 </a>
                 <a
                   href="#servicios"
-                  className="inline-flex items-center justify-center gap-2 rounded-md border border-white/15 px-5 py-3 text-sm font-semibold text-white hover:bg-white/5"
+                  className="rb-button rb-button-ghost inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold text-white"
                 >
                   Consultar servicios
                 </a>
@@ -497,13 +500,13 @@ function App() {
             </div>
 
             <div className="grid content-end gap-4">
-              <div className="rounded-lg border border-white/10 bg-slate-900/80 p-5 shadow-2xl shadow-black/30">
+              <div className="rb-panel rb-terminal-card rounded-lg p-5">
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-300">
                   Enfoque
                 </p>
                 <div className="mt-5 grid gap-3 sm:grid-cols-2">
                   {differentiators.map((item) => (
-                    <div key={item} className="rounded-lg border border-white/10 bg-white/[0.03] p-4">
+                    <div key={item} className="rb-card rounded-lg p-4">
                       <CheckCircle className="mb-3 h-5 w-5 text-emerald-300" />
                       <p className="text-sm font-semibold text-white">{item}</p>
                     </div>
@@ -514,7 +517,7 @@ function App() {
           </div>
         </section>
 
-        <section id="problemas" className="border-t border-white/10 bg-slate-950 px-4 py-16 sm:px-6 lg:px-8">
+        <section id="problemas" className="rb-section border-t border-white/10 px-4 py-16 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <SectionIntro eyebrow="Problemas" title="Problemas que resolvemos">
               <p>
@@ -526,7 +529,7 @@ function App() {
 
             <div className="grid gap-3 md:grid-cols-2">
               {problems.map((problem) => (
-                <div key={problem} className="flex gap-3 rounded-lg border border-white/10 bg-white/[0.03] p-4">
+                <div key={problem} className="rb-card flex gap-3 rounded-lg p-4">
                   <CheckCircle className="mt-0.5 h-5 w-5 flex-none text-cyan-300" />
                   <p className="text-sm leading-6 text-slate-200">{problem}</p>
                 </div>
@@ -535,7 +538,7 @@ function App() {
           </div>
         </section>
 
-        <section id="servicios" className="bg-slate-900 px-4 py-16 sm:px-6 lg:px-8">
+        <section id="servicios" className="rb-section rb-section-muted px-4 py-16 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <SectionIntro eyebrow="Servicios" title="Servicios de IA para empresas">
               <p>
@@ -549,9 +552,9 @@ function App() {
                 const Icon = service.icon;
 
                 return (
-                  <article key={service.title} className="flex flex-col rounded-lg border border-white/10 bg-slate-950/70 p-5">
+                  <article key={service.title} className="rb-card rb-service-card flex flex-col rounded-lg p-5">
                     <div className="mb-5 flex items-start gap-4">
-                      <span className="grid h-11 w-11 flex-none place-items-center rounded-lg bg-cyan-300/10 text-cyan-300">
+                      <span className="rb-icon-tile grid h-11 w-11 flex-none place-items-center rounded-lg text-cyan-300">
                         <Icon className="h-5 w-5" />
                       </span>
                       <div>
@@ -571,7 +574,7 @@ function App() {
                       href={service.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-auto inline-flex items-center justify-center gap-2 rounded-md border border-cyan-300/30 px-4 py-2.5 text-sm font-semibold text-cyan-200 hover:bg-cyan-300/10"
+                      className="rb-button rb-button-ghost mt-auto inline-flex items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm font-semibold text-cyan-200"
                     >
                       {service.cta}
                       <ArrowRight className="h-4 w-4" />
@@ -583,7 +586,7 @@ function App() {
           </div>
         </section>
 
-        <section className="bg-slate-950 px-4 py-16 sm:px-6 lg:px-8">
+        <section className="rb-section px-4 py-16 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <SectionIntro title="Dusare integra las plataformas con la realidad de tu empresa">
               <p>
@@ -595,17 +598,17 @@ function App() {
               </p>
             </SectionIntro>
 
-            <div className="overflow-hidden rounded-lg border border-white/10">
+            <div className="rb-panel overflow-hidden rounded-lg">
               <div className="overflow-x-auto">
                 <table className="min-w-[760px] divide-y divide-white/10 text-left">
-                  <thead className="bg-white/[0.04]">
+                  <thead className="rb-table-head">
                     <tr>
                       <th className="px-4 py-4 text-sm font-semibold text-white">Criterio</th>
                       <th className="px-4 py-4 text-sm font-semibold text-white">Plataforma / SaaS</th>
                       <th className="px-4 py-4 text-sm font-semibold text-white">Dusare</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/10 bg-slate-900/50">
+                  <tbody className="rb-table-body divide-y divide-white/10">
                     {comparisonRows.map((row) => (
                       <tr key={row.criterion}>
                         <td className="px-4 py-4 align-top text-sm font-semibold text-cyan-200">
@@ -631,13 +634,13 @@ function App() {
           </div>
         </section>
 
-        <section id="soluciones" className="bg-slate-900 px-4 py-16 sm:px-6 lg:px-8">
+        <section id="soluciones" className="rb-section rb-section-muted px-4 py-16 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <SectionIntro title="Soluciones según la madurez de tu empresa" />
 
             <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
               {maturitySolutions.map((solution) => (
-                <article key={solution.title} className="rounded-lg border border-white/10 bg-slate-950/70 p-5">
+                <article key={solution.title} className="rb-card rounded-lg p-5">
                   <h3 className="text-lg font-semibold text-white">{solution.title}</h3>
                   <p className="mt-3 text-sm leading-6 text-slate-300">{solution.description}</p>
                   <p className="mt-4 text-sm font-semibold text-cyan-200">Ideal para:</p>
@@ -655,20 +658,20 @@ function App() {
               ))}
             </div>
 
-            <p className="mt-6 rounded-lg border border-white/10 bg-white/[0.03] p-5 text-sm leading-6 text-slate-300">
+            <p className="rb-panel mt-6 rounded-lg p-5 text-sm leading-6 text-slate-300">
               Cada solución se dimensiona según alcance, sistemas a integrar, volumen de uso,
               criticidad operativa, seguridad requerida y nivel de acompañamiento.
             </p>
           </div>
         </section>
 
-        <section id="metodo" className="bg-slate-950 px-4 py-16 sm:px-6 lg:px-8">
+        <section id="metodo" className="rb-section px-4 py-16 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <SectionIntro eyebrow="Método" title="Cómo llevamos IA a producción" />
 
             <div className="grid gap-4 md:grid-cols-4">
               {processSteps.map((step, index) => (
-                <article key={step.title} className="rounded-lg border border-white/10 bg-white/[0.03] p-5">
+                <article key={step.title} className="rb-card rb-step-card rounded-lg p-5">
                   <span className="text-sm font-semibold text-cyan-300">0{index + 1}</span>
                   <h3 className="mt-4 text-lg font-semibold text-white">{step.title}</h3>
                   <p className="mt-3 text-sm leading-6 text-slate-300">{step.description}</p>
@@ -678,7 +681,7 @@ function App() {
           </div>
         </section>
 
-        <section id="industrias" className="bg-slate-900 px-4 py-16 sm:px-6 lg:px-8">
+        <section id="industrias" className="rb-section rb-section-muted px-4 py-16 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <SectionIntro title="Industrias donde Dusare puede acelerar resultados" />
 
@@ -687,7 +690,7 @@ function App() {
                 const Icon = industry.icon;
 
                 return (
-                  <article key={industry.title} className="rounded-lg border border-white/10 bg-slate-950/70 p-5">
+                  <article key={industry.title} className="rb-card rounded-lg p-5">
                     <Icon className="h-6 w-6 text-cyan-300" />
                     <h3 className="mt-4 text-lg font-semibold text-white">{industry.title}</h3>
                     <p className="mt-3 text-sm leading-6 text-slate-300">{industry.description}</p>
@@ -698,7 +701,7 @@ function App() {
           </div>
         </section>
 
-        <section className="bg-slate-950 px-4 py-16 sm:px-6 lg:px-8">
+        <section className="rb-section px-4 py-16 sm:px-6 lg:px-8">
           <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.95fr_1.05fr]">
             <div>
               <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-cyan-300">
@@ -714,7 +717,7 @@ function App() {
                 visión de negocio y ejecución pragmática para llevar soluciones desde el diagnóstico
                 hasta producción.
               </p>
-              <div className="mt-6 rounded-lg border border-white/10 bg-white/[0.03] p-5">
+              <div className="rb-panel mt-6 rounded-lg p-5">
                 <p className="font-semibold text-white">Ariel Sebastián Duarte</p>
                 <p className="mt-1 text-sm text-cyan-200">Founder & AI Solutions Architect</p>
               </div>
@@ -722,7 +725,7 @@ function App() {
 
             <div className="grid gap-3 sm:grid-cols-2">
               {founderPoints.map((point) => (
-                <div key={point} className="flex gap-3 rounded-lg border border-white/10 bg-white/[0.03] p-4">
+                <div key={point} className="rb-card flex gap-3 rounded-lg p-4">
                   <CheckCircle className="mt-0.5 h-5 w-5 flex-none text-emerald-300" />
                   <p className="text-sm leading-6 text-slate-200">{point}</p>
                 </div>
@@ -731,7 +734,7 @@ function App() {
           </div>
         </section>
 
-        <section className="bg-slate-900 px-4 py-16 sm:px-6 lg:px-8">
+        <section className="rb-section rb-section-muted px-4 py-16 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <SectionIntro title="Plataformas y tecnologías que podemos integrar o utilizar según el caso">
               <p>
@@ -741,28 +744,28 @@ function App() {
             </SectionIntro>
 
             <div className="grid gap-6 lg:grid-cols-2">
-              <div className="rounded-lg border border-white/10 bg-slate-950/70 p-5">
+              <div className="rb-card rounded-lg p-5">
                 <div className="mb-4 flex items-center gap-3">
                   <Globe2 className="h-5 w-5 text-cyan-300" />
                   <h3 className="font-semibold text-white">Modelos y plataformas IA</h3>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {aiTechnologies.map((tech) => (
-                    <span key={tech} className="rounded-md border border-white/10 px-3 py-2 text-sm text-slate-200">
+                    <span key={tech} className="rb-tech-pill rounded-md px-3 py-2 text-sm text-slate-200">
                       {tech}
                     </span>
                   ))}
                 </div>
               </div>
 
-              <div className="rounded-lg border border-white/10 bg-slate-950/70 p-5">
+              <div className="rb-card rounded-lg p-5">
                 <div className="mb-4 flex items-center gap-3">
                   <Layers className="h-5 w-5 text-cyan-300" />
                   <h3 className="font-semibold text-white">Integración y desarrollo</h3>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {integrationTechnologies.map((tech) => (
-                    <span key={tech} className="rounded-md border border-white/10 px-3 py-2 text-sm text-slate-200">
+                    <span key={tech} className="rb-tech-pill rounded-md px-3 py-2 text-sm text-slate-200">
                       {tech}
                     </span>
                   ))}
@@ -772,8 +775,8 @@ function App() {
           </div>
         </section>
 
-        <section id="contacto" className="bg-slate-950 px-4 py-16 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-5xl rounded-lg border border-cyan-300/20 bg-cyan-300/10 p-6 text-center sm:p-10">
+        <section id="contacto" className="rb-section px-4 py-16 sm:px-6 lg:px-8">
+          <div className="rb-final-cta mx-auto max-w-5xl rounded-lg p-6 text-center sm:p-10">
             <Workflow className="mx-auto h-8 w-8 text-cyan-300" />
             <h2 className="mt-5 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
               ¿Querés aplicar IA en procesos reales de tu empresa?
@@ -787,7 +790,7 @@ function App() {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-md bg-cyan-300 px-5 py-3 text-sm font-semibold text-slate-950 hover:bg-cyan-200"
+                className="rb-button rb-button-primary inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold"
               >
                 Solicitar diagnóstico IA
                 <MessageCircle className="h-4 w-4" />
@@ -796,7 +799,7 @@ function App() {
                 href={BUDGET_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-md border border-white/20 px-5 py-3 text-sm font-semibold text-white hover:bg-white/5"
+                className="rb-button rb-button-ghost inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold text-white"
               >
                 Consultar presupuesto
                 <ArrowRight className="h-4 w-4" />
@@ -805,7 +808,7 @@ function App() {
                 href={CALENDAR_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-md border border-white/20 px-5 py-3 text-sm font-semibold text-white hover:bg-white/5"
+                className="rb-button rb-button-ghost inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold text-white"
               >
                 Agendar una reunion
                 <Calendar className="h-4 w-4" />
@@ -815,7 +818,7 @@ function App() {
         </section>
       </main>
 
-      <footer className="border-t border-white/10 bg-slate-950 px-4 py-8 sm:px-6 lg:px-8">
+      <footer className="rb-footer border-t border-white/10 px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-7xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="text-lg font-semibold text-white">Dusare</p>
@@ -834,7 +837,7 @@ function App() {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="grid h-10 w-10 place-items-center rounded-md border border-white/10 text-slate-300 hover:bg-white/5 hover:text-white"
+                  className="rb-icon-button grid h-10 w-10 place-items-center rounded-md border border-white/10 text-slate-300 hover:text-white"
                   aria-label={social.name}
                 >
                   <Icon className="h-5 w-5" />
