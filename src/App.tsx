@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   ArrowRight,
   BadgeCheck,
@@ -366,6 +366,128 @@ function SectionIntro({
   );
 }
 
+function StrandsBackground() {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) {
+      return undefined;
+    }
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const context = canvas.getContext('2d');
+    if (!context) {
+      return undefined;
+    }
+
+    let animationFrame = 0;
+    let width = 0;
+    let height = 0;
+    let pixelRatio = 1;
+    let pointerX = 0;
+    let pointerY = 0;
+    let targetPointerX = 0;
+    let targetPointerY = 0;
+
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+      width = Math.max(1, rect.width);
+      height = Math.max(1, rect.height);
+      pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.floor(width * pixelRatio);
+      canvas.height = Math.floor(height * pixelRatio);
+      context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    };
+
+    const handlePointerMove = (event: PointerEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      targetPointerX = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+      targetPointerY = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+    };
+
+    const drawStrand = (
+      index: number,
+      time: number,
+      total: number,
+      colorStart: string,
+      colorEnd: string,
+    ) => {
+      const progress = total <= 1 ? 0 : index / (total - 1);
+      const baseX = progress * width;
+      const amplitude = 34 + Math.sin(index * 1.7) * 18;
+      const drift = Math.sin(time * 0.00035 + index * 0.48) * 44;
+      const pointerDrift = pointerX * 28 * (progress - 0.5);
+      const x = baseX + drift + pointerDrift;
+      const top = -height * 0.1;
+      const bottom = height * 1.12;
+      const controlY = height * (0.32 + Math.sin(index) * 0.05);
+      const lowerControlY = height * (0.68 + Math.cos(index * 0.7) * 0.05);
+
+      const gradient = context.createLinearGradient(0, top, 0, bottom);
+      gradient.addColorStop(0, 'rgba(103, 232, 249, 0)');
+      gradient.addColorStop(0.22, colorStart);
+      gradient.addColorStop(0.62, colorEnd);
+      gradient.addColorStop(1, 'rgba(192, 132, 252, 0)');
+
+      context.beginPath();
+      context.moveTo(x, top);
+      context.bezierCurveTo(
+        x + amplitude + pointerX * 34,
+        controlY,
+        x - amplitude * 1.2 + pointerY * 20,
+        lowerControlY,
+        x + Math.sin(time * 0.0005 + index) * 26,
+        bottom,
+      );
+      context.strokeStyle = gradient;
+      context.lineWidth = 0.7 + (index % 4) * 0.18;
+      context.stroke();
+    };
+
+    const render = (time: number) => {
+      pointerX += (targetPointerX - pointerX) * 0.045;
+      pointerY += (targetPointerY - pointerY) * 0.045;
+
+      context.clearRect(0, 0, width, height);
+      context.globalCompositeOperation = 'lighter';
+      context.shadowBlur = 18;
+      context.shadowColor = 'rgba(103, 232, 249, 0.35)';
+
+      const strandCount = width < 640 ? 18 : 34;
+      for (let index = 0; index < strandCount; index += 1) {
+        drawStrand(
+          index,
+          time,
+          strandCount,
+          'rgba(103, 232, 249, 0.30)',
+          index % 3 === 0 ? 'rgba(192, 132, 252, 0.24)' : 'rgba(94, 234, 212, 0.20)',
+        );
+      }
+
+      context.shadowBlur = 0;
+      context.globalCompositeOperation = 'source-over';
+
+      if (!prefersReducedMotion) {
+        animationFrame = window.requestAnimationFrame(render);
+      }
+    };
+
+    resize();
+    window.addEventListener('pointermove', handlePointerMove);
+    window.addEventListener('resize', resize);
+    render(0);
+
+    return () => {
+      window.cancelAnimationFrame(animationFrame);
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('resize', resize);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} className="rb-strands-canvas" aria-hidden="true" />;
+}
+
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -449,18 +571,19 @@ function App() {
 
       <main>
         <section className="rb-hero relative overflow-hidden pt-28">
-          <div className="absolute inset-0">
+          <div className="absolute inset-0 z-0">
             <img
               src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&q=80&w=2000"
               alt="Arquitectura tecnológica y codigo en pantalla"
               className="h-full w-full object-cover opacity-[0.08]"
             />
+            <StrandsBackground />
             <div className="rb-grid-plane" aria-hidden="true" />
             <div className="rb-orb rb-orb-one" aria-hidden="true" />
             <div className="rb-orb rb-orb-two" aria-hidden="true" />
           </div>
 
-          <div className="relative mx-auto grid max-w-7xl gap-12 px-4 pb-16 pt-10 sm:px-6 sm:pb-20 lg:grid-cols-[1.08fr_0.92fr] lg:px-8 lg:pb-24 lg:pt-16">
+          <div className="relative z-10 mx-auto grid max-w-7xl gap-12 px-4 pb-16 pt-10 sm:px-6 sm:pb-20 lg:grid-cols-[1.08fr_0.92fr] lg:px-8 lg:pb-24 lg:pt-16">
             <div className="flex flex-col justify-center">
               <p className="rb-chip mb-5 inline-flex w-fit items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-cyan-200">
                 <BadgeCheck className="h-4 w-4" />
