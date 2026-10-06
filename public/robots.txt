@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dusare.com/sitemap.xml
+Sitemap: https://dusare.com.ar/sitemap.xml

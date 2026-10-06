@@ -329,24 +329,11 @@ a, button, input, textarea, select {
 .reactbits-theme {
   position: relative;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 20% 0%, rgba(34, 211, 238, 0.18), transparent 34rem),
-    radial-gradient(circle at 80% 8%, rgba(168, 85, 247, 0.16), transparent 34rem),
-    linear-gradient(180deg, #03040a 0%, #060914 48%, #03040a 100%);
+  background: #03040a;
 }
 
 .reactbits-theme::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(125, 249, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(125, 249, 255, 0.08) 1px, transparent 1px);
-  background-size: 44px 44px;
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 70%);
-  opacity: 0.42;
+  content: none;
 }
 
 .reactbits-theme > header,
@@ -356,25 +343,47 @@ a, button, input, textarea, select {
   z-index: 1;
 }
 
-.site-noise {
+.reactbits-theme > header {
+  z-index: 2;
+}
+
+.rb-page-floating-lines {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.13;
-  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.8) 1px, transparent 0);
-  background-size: 22px 22px;
-  mix-blend-mode: soft-light;
+  overflow: hidden;
+  background: #03040a;
+  opacity: 0.7;
+  mix-blend-mode: screen;
+  filter: brightness(1.34) saturate(1.35) contrast(1.08);
+}
+
+.rb-page-floating-lines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: rgba(3, 4, 10, 0.42);
+}
+
+.rb-page-floating-lines .floating-lines-container {
+  position: absolute;
+  inset: 0;
+}
+
+.rb-page-floating-lines canvas {
+  opacity: 1;
 }
 
 .rb-header {
-  background: linear-gradient(180deg, rgba(3, 4, 10, 0.92), rgba(3, 4, 10, 0.68));
+  background: rgba(3, 4, 10, 0.34);
   backdrop-filter: blur(22px) saturate(1.35);
   box-shadow: 0 20px 80px rgba(0, 0, 0, 0.35);
 }
 
 .rb-mobile-menu {
-  background: rgba(3, 4, 10, 0.96);
+  background: rgba(3, 4, 10, 0.7);
   backdrop-filter: blur(18px);
 }
 
@@ -386,6 +395,54 @@ a, button, input, textarea, select {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.12),
     0 0 30px rgba(34, 211, 238, 0.22);
+}
+
+.rb-logo {
+  overflow: hidden;
+}
+
+.rb-logo-image {
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
+  object-position: 50% 24%;
+  transform: scale(2.9);
+}
+
+.rb-brand-link {
+  min-width: 0;
+}
+
+.rb-brand-lockup {
+  gap: 1rem;
+  min-width: 0;
+}
+
+.rb-brand-name {
+  font-size: 1.6875rem;
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: 0;
+  border-radius: 0;
+  backdrop-filter: none;
+  cursor: default;
+  overflow: visible;
+}
+
+.rb-brand-name .text-content {
+  line-height: 0.95;
+}
+
+.rb-brand-rotating {
+  min-width: 14.25rem;
+  height: 1.8rem;
+  align-items: center;
+  overflow: hidden;
+  color: #ffffff;
+  font-size: 1.265625rem;
+  font-weight: 400;
+  line-height: 1.8rem;
+  text-shadow: none;
 }
 
 .rb-nav-link {
@@ -413,38 +470,17 @@ a, button, input, textarea, select {
 }
 
 .rb-hero {
+  position: relative;
   min-height: 720px;
-  background: #03040a;
+  background: transparent;
 }
 
-.rb-grid-plane {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background:
-    linear-gradient(to right, rgba(103, 232, 249, 0.10) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(103, 232, 249, 0.08) 1px, transparent 1px),
-    radial-gradient(circle at 50% 22%, rgba(34, 211, 238, 0.18), transparent 34rem),
-    linear-gradient(180deg, rgba(3, 4, 10, 0.2), #03040a 88%);
-  background-size: 80px 80px, 80px 80px, auto, auto;
-  transform: perspective(900px) rotateX(58deg) translateY(-180px) scale(1.38);
-  transform-origin: top;
-  opacity: 0.18;
+.rb-hero::after {
+  content: none;
 }
 
-.rb-strands-layer {
-  position: absolute;
-  left: 45%;
-  top: 48%;
-  z-index: 2;
-  width: min(980px, 92vw);
-  height: min(520px, 58vw);
-  min-height: 320px;
-  transform: translate(-50%, -50%);
-  opacity: 1;
-  mix-blend-mode: screen;
-  filter: saturate(1.35) contrast(1.08);
-  pointer-events: none;
+.rb-hero-content::after {
+  content: none;
 }
 
 .rb-orb {
@@ -474,13 +510,29 @@ a, button, input, textarea, select {
 .rb-title {
   letter-spacing: 0;
   text-wrap: balance;
+  color: #ffffff;
+  filter: drop-shadow(0 0 28px rgba(34, 211, 238, 0.12));
+}
+
+.rb-title .blur-text-segment {
   background: linear-gradient(110deg, #ffffff 10%, #9efbff 42%, #c084fc 74%, #ffffff 96%);
   background-size: 220% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 0 28px rgba(34, 211, 238, 0.12));
+  -webkit-text-fill-color: transparent;
   animation: rb-text-shine 9s ease-in-out infinite;
+}
+
+.rb-hero-title-rotator {
+  display: flex;
+  min-height: 4.4em;
+  align-content: center;
+  justify-content: center;
+  row-gap: 0.12em;
+  padding-block: 0.16em;
+  line-height: 1.24;
+  text-align: center;
 }
 
 .rb-chip,
@@ -492,6 +544,56 @@ a, button, input, textarea, select {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.12),
     0 0 24px rgba(34, 211, 238, 0.08);
+}
+
+.rb-tech-logo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+  gap: 0.65rem;
+}
+
+.rb-tech-logo-card {
+  --tech-accent: #67e8f9;
+  display: flex;
+  min-height: 3.25rem;
+  align-items: center;
+  gap: 0.75rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--tech-accent) 16%, transparent), transparent 58%),
+    rgba(255, 255, 255, 0.035);
+  padding: 0.6rem 0.75rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.rb-tech-logo-mark {
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--tech-accent) 55%, transparent);
+  border-radius: 0.45rem;
+  background:
+    radial-gradient(circle at 30% 18%, rgba(255, 255, 255, 0.38), transparent 34%),
+    color-mix(in srgb, var(--tech-accent) 24%, rgba(2, 6, 23, 0.88));
+  color: #ffffff;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1;
+  text-align: center;
+  box-shadow:
+    0 0 20px color-mix(in srgb, var(--tech-accent) 22%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.rb-tech-logo-mark img {
+  width: 1.45rem;
+  height: 1.45rem;
+  object-fit: contain;
 }
 
 .rb-button {
@@ -531,15 +633,37 @@ a, button, input, textarea, select {
 
 .rb-section {
   position: relative;
-  background:
-    radial-gradient(circle at 80% 0%, rgba(34, 211, 238, 0.06), transparent 28rem),
-    rgba(3, 4, 10, 0.72);
+  background: transparent;
+}
+
+.rb-section::before {
+  content: none;
+}
+
+.rb-section > * {
+  position: relative;
+  z-index: 1;
 }
 
 .rb-section-muted {
-  background:
-    radial-gradient(circle at 16% 0%, rgba(168, 85, 247, 0.08), transparent 28rem),
-    rgba(7, 10, 20, 0.82);
+  background: transparent;
+}
+
+.rb-scroll-fade {
+  opacity: 0.18;
+  transform: translateY(2.375rem);
+  filter: blur(10px);
+  transition:
+    opacity 140ms linear,
+    transform 180ms ease-out,
+    filter 180ms ease-out;
+  will-change: opacity, transform, filter;
+}
+
+.rb-scroll-fade-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
 }
 
 .rb-panel,
@@ -619,7 +743,7 @@ a, button, input, textarea, select {
 }
 
 .rb-footer {
-  background: rgba(3, 4, 10, 0.92);
+  background: transparent;
 }
 
 @keyframes rb-text-shine {
@@ -645,9 +769,19 @@ a, button, input, textarea, select {
     min-height: auto;
   }
 
-  .rb-grid-plane {
-    transform: perspective(800px) rotateX(62deg) translateY(-150px) scale(1.65);
-    opacity: 0.22;
+  .rb-brand-lockup {
+    gap: 0.55rem;
+  }
+
+  .rb-brand-name {
+    font-size: 1.1625rem;
+  }
+
+  .rb-brand-rotating {
+    min-width: 7.875rem;
+    height: 1.35rem;
+    font-size: 0.871875rem;
+    line-height: 1.35rem;
   }
 
   .rb-orb {
@@ -655,28 +789,30 @@ a, button, input, textarea, select {
     height: 22rem;
   }
 
-  .rb-strands-layer {
-    display: none;
+  .rb-page-floating-lines {
+    opacity: 0.52;
   }
 }
 
 @media (max-width: 1023px) {
-  .rb-strands-layer {
-    display: none;
+  .rb-page-floating-lines {
+    opacity: 0.58;
   }
 }
 
 @media (min-width: 1024px) {
-  .rb-strands-layer {
-    left: 63%;
-    top: 39%;
-    width: min(940px, 64vw);
-    height: min(460px, 36vw);
-    opacity: 0.98;
+  .rb-page-floating-lines {
+    opacity: 0.7;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .rb-scroll-fade {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
   *,
   *::before,
   *::after {

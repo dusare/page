@@ -1,0 +1,15 @@
+.blur-text {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.blur-text-segment {
+  display: inline-block;
+  will-change: transform, filter, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blur-text-segment {
+    will-change: auto;
+  }
+}

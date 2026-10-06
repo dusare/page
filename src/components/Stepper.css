@@ -1,0 +1,91 @@
+.rb-stepper {
+  display: flex;
+  width: min(100%, 46rem);
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+}
+
+.rb-stepper-item {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.rb-stepper-indicator {
+  z-index: 1;
+  display: grid;
+  height: 2rem;
+  width: 2rem;
+  place-items: center;
+  border: 1px solid rgba(16, 185, 129, 0.5);
+  border-radius: 9999px;
+  background:
+    radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.26), transparent 42%),
+    linear-gradient(135deg, rgba(16, 185, 129, 0.94), rgba(34, 211, 238, 0.82));
+  color: #ecfeff;
+  box-shadow:
+    0 0 0 5px rgba(16, 185, 129, 0.08),
+    0 0 24px rgba(45, 212, 191, 0.28);
+}
+
+.rb-stepper-check {
+  height: 1rem;
+  width: 1rem;
+}
+
+.rb-stepper-label {
+  margin-top: 0.75rem;
+  max-width: 9rem;
+  color: rgb(226 232 240);
+  font-size: 0.78rem;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.rb-stepper-connector {
+  position: absolute;
+  top: 1rem;
+  left: calc(50% + 1.25rem);
+  right: calc(-50% + 1.25rem);
+  height: 2px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, rgba(45, 212, 191, 0.9), rgba(103, 232, 249, 0.42));
+  transform-origin: left;
+}
+
+@media (max-width: 640px) {
+  .rb-stepper {
+    display: grid;
+    gap: 0.85rem;
+    width: 100%;
+  }
+
+  .rb-stepper-item {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 0.8rem;
+    align-items: center;
+    text-align: left;
+  }
+
+  .rb-stepper-label {
+    margin-top: 0;
+    max-width: none;
+  }
+
+  .rb-stepper-connector {
+    top: 2rem;
+    bottom: -0.85rem;
+    left: 1rem;
+    right: auto;
+    width: 2px;
+    height: auto;
+    background: linear-gradient(180deg, rgba(45, 212, 191, 0.9), rgba(103, 232, 249, 0.3));
+    transform-origin: top;
+  }
+}
